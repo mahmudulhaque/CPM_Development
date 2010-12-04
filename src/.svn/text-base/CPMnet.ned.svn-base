@@ -1,0 +1,137 @@
+//------------------------------------------------------------
+// File: CPMnet.ned
+//
+//  OMNeT++  simulation of p2p BPEL enactment
+// 
+//  Weihai Yu created May 2007
+//------------------------------------------------------------
+
+
+// Feeder --
+//
+// A feeder generates flows
+//
+simple Feeder
+{
+    parameters:
+        volatile double flow_ia_time @unit(ms); // think time between flows
+    gates:
+        input from_sink;
+}
+
+// Sink --
+//
+// A sink collects results
+//
+simple Sink
+{
+    gates:
+        input from_agent[];
+}
+
+
+// Agent --
+//
+// CPM agent
+//
+simple Agent
+{
+    parameters:
+        volatile double interpret_time @unit(ms); // xml parsing, interpretation
+        volatile double proc_time @unit(ms);      // local processing
+        volatile double scpm_proc_time @unit(ms); // scpm processing
+        volatile double site_failrate;
+        volatile double fail_detection_time @unit(ms);
+    gates:
+        output to_agent[];
+        output to_sink;
+        input from_agent[];
+}
+
+//endsimple 
+
+// chennels
+channel InterProc extends ned.DatarateChannel
+{
+    parameters:
+        delay = normal(50us, 0.0001);
+        ber = 0;
+        datarate = 1000Mbps;
+}
+
+channel IntraLan extends ned.DatarateChannel
+{
+    parameters:
+        delay = normal(1ms, 0.0001);
+		delay = 1ms;
+        ber = 0;
+        datarate = 100Mbps;
+}
+
+channel InterLan extends ned.DatarateChannel
+{
+    parameters:
+        delay = normal(5ms, 0.0001);
+		delay = 50ms;
+        ber = 0;
+        datarate = 10Mbps;
+}
+
+// CPMnet --
+//
+network CPMnet
+{
+    parameters:
+        bool debugging;
+        bool instantiate; // whether to instantiate for decentralization
+        int num_engines; // 0 for decentralized
+		// time for dispatching to engine when centralized with multiple engine,
+        volatile double engine_dispatch_time @unit(ms); 
+        string cpm_file;
+        int num_agents;
+        int agent_dups; // number of servers = (num_agents-1)*agent_dups
+        int mpl; // multi-programming level of agents
+        int num_repeats; // number of repeated runs for each process
+		                 // 0, no repeat
+		                 // greater than 1000, repeat for ever
+        int flow_num_branches;
+        int flow_num_steps;
+        volatile int cmsg_byte_length;
+        volatile int smsg_byte_length;
+        // start recording after this time to avoid noises
+        double record_start_time @unit(s);
+    submodules:
+        feeder: Feeder {
+            parameters:
+                @display("i=block/process,cyan;p=160,20");
+        }
+		sink: Sink {
+		    parameters:
+		        @display("i=block/process,gold;p=360,80");
+		
+		
+		    gates:
+		        from_agent[num_agents];
+		}
+        agent[num_agents]: Agent {
+            parameters:
+                @display("i=device/server,blue;p=20,100,ring,200,100");
+
+            gates:
+                to_agent[num_agents];
+                from_agent[num_agents];
+         }
+    connections allowunconnected:
+
+	    // TODO: more realistic connections than all-connected??
+       
+        for i=0..num_agents-1, for j=0..num_agents-1 {
+            agent[i].to_agent[j] --> InterLan --> agent[j].from_agent[i];
+        }
+       
+        for i=0..num_agents-1 {
+            agent[i].to_sink --> {  delay = 0s; } --> sink.from_agent[i];
+        }
+}
+
+

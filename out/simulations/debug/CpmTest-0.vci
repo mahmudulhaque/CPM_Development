@@ -1,0 +1,396 @@
+file 62611 1291423108                                           
+version 2
+run CpmTest-0-20101204-01:38:19-898
+attr configname CpmTest
+attr datetime 20101204-01:38:19
+attr experiment CpmTest
+attr inifile /Users/mahmudulhaque/Project_simcekk/CPM_INET/src/cpm_debug.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network CPMnet
+attr processid 898
+attr repetition 0
+attr replication #0
+attr resultdir ../out/simulations/debug
+attr runnumber 0
+attr seedset 0
+
+vector 17  CPMnet.agent[0].tcpApp[0]  Num-CPU-busy  ETV
+vector 16  CPMnet.agent[0].tcpApp[0]  Queuing-Time  ETV
+vector 706  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 694  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 693  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 696  CPMnet.agent[0].tcp  "sent ack"  ETV
+693	758 15 63 63 0 0 1 64536 64536 64536 4164895296
+694	773 15 63 63 0 0 1 64536 64536 64536 4164895296
+696	788 11 63 63 0 0 1 0 0 0 0
+706	799 11 63 63 0 0 1 0 0 0 0
+vector 729  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 717  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 716  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 719  CPMnet.agent[0].tcp  "sent ack"  ETV
+716	1027 15 68 68 0 0 1 64536 64536 64536 4164895296
+717	1042 15 68 68 0 0 1 64536 64536 64536 4164895296
+719	1057 11 68 68 0 0 1 0 0 0 0
+729	1068 11 68 68 0 0 1 0 0 0 0
+vector 752  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 740  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 739  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 742  CPMnet.agent[0].tcp  "sent ack"  ETV
+739	1296 15 73 73 0 0 1 64536 64536 64536 4164895296
+740	1311 15 73 73 0 0 1 64536 64536 64536 4164895296
+742	1326 11 73 73 0 0 1 0 0 0 0
+752	1337 11 73 73 0 0 1 0 0 0 0
+vector 775  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 763  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 762  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 765  CPMnet.agent[0].tcp  "sent ack"  ETV
+762	1565 15 78 78 0 0 1 64536 64536 64536 4164895296
+763	1580 15 78 78 0 0 1 64536 64536 64536 4164895296
+765	1595 11 78 78 0 0 1 0 0 0 0
+775	1606 11 78 78 0 0 1 0 0 0 0
+vector 798  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 786  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 785  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 788  CPMnet.agent[0].tcp  "sent ack"  ETV
+785	1834 15 83 83 0 0 1 64536 64536 64536 4164895296
+786	1849 15 83 83 0 0 1 64536 64536 64536 4164895296
+788	1864 11 83 83 0 0 1 0 0 0 0
+798	1875 11 83 83 0 0 1 0 0 0 0
+vector 821  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 809  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 808  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 811  CPMnet.agent[0].tcp  "sent ack"  ETV
+808	2103 15 88 88 0 0 1 64536 64536 64536 4164895296
+809	2118 15 88 88 0 0 1 64536 64536 64536 4164895296
+811	2133 11 88 88 0 0 1 0 0 0 0
+821	2144 11 88 88 0 0 1 0 0 0 0
+vector 844  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 832  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 831  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 834  CPMnet.agent[0].tcp  "sent ack"  ETV
+831	2372 15 93 93 0 0 1 64536 64536 64536 4164895296
+832	2387 15 93 93 0 0 1 64536 64536 64536 4164895296
+834	2402 11 93 93 0 0 1 0 0 0 0
+844	2413 11 93 93 0 0 1 0 0 0 0
+vector 867  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 855  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 854  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 857  CPMnet.agent[0].tcp  "sent ack"  ETV
+854	2641 15 98 98 0 0 1 64536 64536 64536 4164895296
+855	2656 15 98 98 0 0 1 64536 64536 64536 4164895296
+857	2671 11 98 98 0 0 1 0 0 0 0
+867	2682 11 98 98 0 0 1 0 0 0 0
+vector 890  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 878  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 877  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 880  CPMnet.agent[0].tcp  "sent ack"  ETV
+877	2910 16 103 103 0 0 1 64536 64536 64536 4164895296
+878	2926 16 103 103 0 0 1 64536 64536 64536 4164895296
+880	2942 12 103 103 0 0 1 0 0 0 0
+890	2954 12 103 103 0 0 1 0 0 0 0
+vector 913  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 901  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 900  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 903  CPMnet.agent[0].tcp  "sent ack"  ETV
+900	3183 16 108 108 0 0 1 64536 64536 64536 4164895296
+901	3199 16 108 108 0 0 1 64536 64536 64536 4164895296
+903	3215 12 108 108 0 0 1 0 0 0 0
+913	3227 12 108 108 0 0 1 0 0 0 0
+vector 936  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 924  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 923  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 926  CPMnet.agent[0].tcp  "sent ack"  ETV
+923	3456 16 113 113 0 0 1 64536 64536 64536 4164895296
+924	3472 16 113 113 0 0 1 64536 64536 64536 4164895296
+926	3488 12 113 113 0 0 1 0 0 0 0
+936	3500 12 113 113 0 0 1 0 0 0 0
+vector 959  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 947  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 946  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 949  CPMnet.agent[0].tcp  "sent ack"  ETV
+946	3729 16 118 118 0 0 1 64536 64536 64536 4164895296
+947	3745 16 118 118 0 0 1 64536 64536 64536 4164895296
+949	3761 12 118 118 0 0 1 0 0 0 0
+959	3773 12 118 118 0 0 1 0 0 0 0
+vector 982  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 970  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 969  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 972  CPMnet.agent[0].tcp  "sent ack"  ETV
+969	4002 16 123 123 0 0 1 64536 64536 64536 4164895296
+970	4018 16 123 123 0 0 1 64536 64536 64536 4164895296
+972	4034 12 123 123 0 0 1 0 0 0 0
+982	4046 12 123 123 0 0 1 0 0 0 0
+vector 1005  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 993  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 992  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 995  CPMnet.agent[0].tcp  "sent ack"  ETV
+992	4276 16 128 128 0 0 1 64536 64536 64536 4164895296
+993	4292 16 128 128 0 0 1 64536 64536 64536 4164895296
+995	4308 12 128 128 0 0 1 0 0 0 0
+1005	4320 13 128 128 0 0 1 0 0 0 0
+vector 1028  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 1016  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 1015  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 1018  CPMnet.agent[0].tcp  "sent ack"  ETV
+1015	4554 17 133 133 0 0 1 64536 64536 64536 4164895296
+1016	4571 17 133 133 0 0 1 64536 64536 64536 4164895296
+1018	4588 13 133 133 0 0 1 0 0 0 0
+1028	4601 13 133 133 0 0 1 0 0 0 0
+vector 1051  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 1039  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 1038  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 1041  CPMnet.agent[0].tcp  "sent ack"  ETV
+1038	4835 17 138 138 0 0 1 64536 64536 64536 4164895296
+1039	4852 17 138 138 0 0 1 64536 64536 64536 4164895296
+1041	4869 13 138 138 0 0 1 0 0 0 0
+1051	4882 13 138 138 0 0 1 0 0 0 0
+vector 1074  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 1062  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 1061  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 1064  CPMnet.agent[0].tcp  "sent ack"  ETV
+1061	5116 17 143 143 0 0 1 64536 64536 64536 4164895296
+1062	5133 17 143 143 0 0 1 64536 64536 64536 4164895296
+1064	5150 13 143 143 0 0 1 0 0 0 0
+1074	5163 13 143 143 0 0 1 0 0 0 0
+vector 1097  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 1085  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 1084  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 1087  CPMnet.agent[0].tcp  "sent ack"  ETV
+1084	5397 17 148 148 0 0 1 64536 64536 64536 4164895296
+1085	5414 17 148 148 0 0 1 64536 64536 64536 4164895296
+1087	5431 13 148 148 0 0 1 0 0 0 0
+1097	5444 13 148 148 0 0 1 0 0 0 0
+vector 1120  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 1108  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 1107  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 1110  CPMnet.agent[0].tcp  "sent ack"  ETV
+1107	5678 17 153 153 0 0 1 64536 64536 64536 4164895296
+1108	5695 17 153 153 0 0 1 64536 64536 64536 4164895296
+1110	5712 13 153 153 0 0 1 0 0 0 0
+1120	5725 13 153 153 0 0 1 0 0 0 0
+vector 1143  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 1131  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 1130  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 1133  CPMnet.agent[0].tcp  "sent ack"  ETV
+1130	5959 17 158 158 0 0 1 64536 64536 64536 4164895296
+1131	5976 17 158 158 0 0 1 64536 64536 64536 4164895296
+1133	5993 13 158 158 0 0 1 0 0 0 0
+1143	6006 13 158 158 0 0 1 0 0 0 0
+vector 20  CPMnet.agent[0].eth[0].queue  "queue length"  ETV
+vector 22  CPMnet.agent[0].eth[0].mac  framesSent  ETV
+vector 24  CPMnet.agent[0].eth[0].mac  bytesSent  ETV
+vector 216  CPMnet.switch1.mac[0]  framesReceivedOK  ETV
+vector 218  CPMnet.switch1.mac[0]  bytesReceivedOK  ETV
+vector 222  CPMnet.switch1.mac[0]  framesPassedToHL  ETV
+vector 214  CPMnet.switch1.relayUnit  "buffer level"  ETV
+vector 227  CPMnet.switch1.mac[1]  framesSent  ETV
+vector 229  CPMnet.switch1.mac[1]  bytesSent  ETV
+vector 41  CPMnet.agent[1].eth[0].mac  framesReceivedOK  ETV
+vector 43  CPMnet.agent[1].eth[0].mac  bytesReceivedOK  ETV
+vector 47  CPMnet.agent[1].eth[0].mac  framesPassedToHL  ETV
+vector 239  CPMnet.switch1.mac[2]  framesSent  ETV
+vector 241  CPMnet.switch1.mac[2]  bytesSent  ETV
+vector 251  CPMnet.switch1.mac[3]  framesSent  ETV
+vector 253  CPMnet.switch1.mac[3]  bytesSent  ETV
+vector 263  CPMnet.switch1.mac[4]  framesSent  ETV
+vector 265  CPMnet.switch1.mac[4]  bytesSent  ETV
+vector 275  CPMnet.switch1.mac[5]  framesSent  ETV
+vector 277  CPMnet.switch1.mac[5]  bytesSent  ETV
+vector 290  CPMnet.router.eth[0].mac  framesReceivedOK  ETV
+vector 292  CPMnet.router.eth[0].mac  bytesReceivedOK  ETV
+vector 296  CPMnet.router.eth[0].mac  framesPassedToHL  ETV
+vector 40  CPMnet.agent[1].eth[0].mac  framesSent  ETV
+vector 42  CPMnet.agent[1].eth[0].mac  bytesSent  ETV
+vector 228  CPMnet.switch1.mac[1]  framesReceivedOK  ETV
+vector 230  CPMnet.switch1.mac[1]  bytesReceivedOK  ETV
+vector 234  CPMnet.switch1.mac[1]  framesPassedToHL  ETV
+vector 215  CPMnet.switch1.mac[0]  framesSent  ETV
+vector 217  CPMnet.switch1.mac[0]  bytesSent  ETV
+vector 23  CPMnet.agent[0].eth[0].mac  framesReceivedOK  ETV
+vector 25  CPMnet.agent[0].eth[0].mac  bytesReceivedOK  ETV
+vector 29  CPMnet.agent[0].eth[0].mac  framesPassedToHL  ETV
+vector 240  CPMnet.switch1.mac[2]  framesReceivedOK  ETV
+vector 242  CPMnet.switch1.mac[2]  bytesReceivedOK  ETV
+vector 246  CPMnet.switch1.mac[2]  framesPassedToHL  ETV
+vector 252  CPMnet.switch1.mac[3]  framesReceivedOK  ETV
+vector 254  CPMnet.switch1.mac[3]  bytesReceivedOK  ETV
+vector 258  CPMnet.switch1.mac[3]  framesPassedToHL  ETV
+vector 264  CPMnet.switch1.mac[4]  framesReceivedOK  ETV
+vector 266  CPMnet.switch1.mac[4]  bytesReceivedOK  ETV
+vector 270  CPMnet.switch1.mac[4]  framesPassedToHL  ETV
+vector 289  CPMnet.router.eth[0].mac  framesSent  ETV
+vector 291  CPMnet.router.eth[0].mac  bytesSent  ETV
+vector 276  CPMnet.switch1.mac[5]  framesReceivedOK  ETV
+vector 278  CPMnet.switch1.mac[5]  bytesReceivedOK  ETV
+vector 282  CPMnet.switch1.mac[5]  framesPassedToHL  ETV
+vector 467  CPMnet.agent[1].tcp  "rcvd seq"  ETV
+vector 468  CPMnet.agent[1].tcp  "rcvd ack"  ETV
+vector 464  CPMnet.agent[1].tcp  "advertised window"  ETV
+vector 462  CPMnet.agent[1].tcp  "send window"  ETV
+vector 476  CPMnet.agent[1].tcp  tcpRcvQueueBytes  ETV
+vector 463  CPMnet.agent[1].tcp  "receive window"  ETV
+vector 466  CPMnet.agent[1].tcp  "sent ack"  ETV
+vector 1157  CPMnet.agent[1].tcp  "rcvd seq"  ETV
+vector 1158  CPMnet.agent[1].tcp  "rcvd ack"  ETV
+vector 1154  CPMnet.agent[1].tcp  "advertised window"  ETV
+vector 1152  CPMnet.agent[1].tcp  "send window"  ETV
+vector 1166  CPMnet.agent[1].tcp  tcpRcvQueueBytes  ETV
+vector 1153  CPMnet.agent[1].tcp  "receive window"  ETV
+vector 1156  CPMnet.agent[1].tcp  "sent ack"  ETV
+vector 317  CPMnet.router.eth[2].mac  framesSent  ETV
+vector 319  CPMnet.router.eth[2].mac  bytesSent  ETV
+vector 428  CPMnet.switch3.mac[6]  framesReceivedOK  ETV
+vector 430  CPMnet.switch3.mac[6]  bytesReceivedOK  ETV
+vector 434  CPMnet.switch3.mac[6]  framesPassedToHL  ETV
+vector 354  CPMnet.switch3.relayUnit  "buffer level"  ETV
+vector 355  CPMnet.switch3.mac[0]  framesSent  ETV
+vector 357  CPMnet.switch3.mac[0]  bytesSent  ETV
+vector 367  CPMnet.switch3.mac[1]  framesSent  ETV
+vector 369  CPMnet.switch3.mac[1]  bytesSent  ETV
+vector 379  CPMnet.switch3.mac[2]  framesSent  ETV
+vector 381  CPMnet.switch3.mac[2]  bytesSent  ETV
+vector 391  CPMnet.switch3.mac[3]  framesSent  ETV
+vector 393  CPMnet.switch3.mac[3]  bytesSent  ETV
+vector 403  CPMnet.switch3.mac[4]  framesSent  ETV
+vector 405  CPMnet.switch3.mac[4]  bytesSent  ETV
+vector 415  CPMnet.switch3.mac[5]  framesSent  ETV
+vector 417  CPMnet.switch3.mac[5]  bytesSent  ETV
+vector 356  CPMnet.switch3.mac[0]  framesReceivedOK  ETV
+vector 358  CPMnet.switch3.mac[0]  bytesReceivedOK  ETV
+vector 362  CPMnet.switch3.mac[0]  framesPassedToHL  ETV
+vector 427  CPMnet.switch3.mac[6]  framesSent  ETV
+vector 429  CPMnet.switch3.mac[6]  bytesSent  ETV
+vector 318  CPMnet.router.eth[2].mac  framesReceivedOK  ETV
+vector 320  CPMnet.router.eth[2].mac  bytesReceivedOK  ETV
+vector 324  CPMnet.router.eth[2].mac  framesPassedToHL  ETV
+vector 368  CPMnet.switch3.mac[1]  framesReceivedOK  ETV
+vector 370  CPMnet.switch3.mac[1]  bytesReceivedOK  ETV
+vector 374  CPMnet.switch3.mac[1]  framesPassedToHL  ETV
+vector 315  CPMnet.router.eth[2].queue  "queue length"  ETV
+vector 380  CPMnet.switch3.mac[2]  framesReceivedOK  ETV
+vector 382  CPMnet.switch3.mac[2]  bytesReceivedOK  ETV
+vector 386  CPMnet.switch3.mac[2]  framesPassedToHL  ETV
+vector 392  CPMnet.switch3.mac[3]  framesReceivedOK  ETV
+vector 394  CPMnet.switch3.mac[3]  bytesReceivedOK  ETV
+vector 398  CPMnet.switch3.mac[3]  framesPassedToHL  ETV
+vector 404  CPMnet.switch3.mac[4]  framesReceivedOK  ETV
+vector 406  CPMnet.switch3.mac[4]  bytesReceivedOK  ETV
+vector 410  CPMnet.switch3.mac[4]  framesPassedToHL  ETV
+vector 416  CPMnet.switch3.mac[5]  framesReceivedOK  ETV
+vector 418  CPMnet.switch3.mac[5]  bytesReceivedOK  ETV
+vector 422  CPMnet.switch3.mac[5]  framesPassedToHL  ETV
+vector 1626  CPMnet.agent[0].tcp  tcpRcvQueueBytes  ETV
+vector 1614  CPMnet.agent[0].tcp  "advertised window"  ETV
+vector 1613  CPMnet.agent[0].tcp  "receive window"  ETV
+vector 1616  CPMnet.agent[0].tcp  "sent ack"  ETV
+1613	11895 21 4042 4042 0.51 0.51 1 64536 64536 64536 4164895296
+1614	11916 21 4042 4042 0.51 0.51 1 64536 64536 64536 4164895296
+1616	11937 17 4042 4042 0.51 0.51 1 0 0 0 0
+1626	11954 17 4042 4042 0.51 0.51 1 0 0 0 0
+16	11971 225 1 4040 0 0.51 21 0 0 0 0
+17	12196 452 1 4041 0 0.51 42 0 1 21 21
+20	12648 1451 171 1829 0.00002 0.001208319969 62 0 9 327 2043
+22	14099 1327 256 4136 0.001006719999 0.510130479991 52 1 52 1378 48230
+23	15426 790 507 4121 0.001036879996 0.510103759992 31 1 31 496 10416
+24	16216 1424 256 4136 0.001006719999 0.510130479991 52 64 3328 88192 197550080
+25	17640 845 507 4121 0.001036879996 0.510103759992 31 64 1984 31744 42663936
+29	18485 790 507 4121 0.001036879996 0.510103759992 31 1 31 496 10416
+40	19275 74 436 1429 0.001030159997 0.001160159997 3 1 3 6 14
+41	19349 342 291 2417 0.001013439998 0.001300319994 14 1 14 105 1015
+42	19691 79 436 1429 0.001030159997 0.001160159997 3 64 192 384 57344
+43	19770 364 291 2417 0.001013439998 0.001300319994 14 64 896 6720 4157440
+47	20134 342 291 2417 0.001013439998 0.001300319994 14 1 14 105 1015
+214	20476 4353 260 4139 0.001006719999 0.510130479991 166 0 64 5312 339968
+215	24829 821 506 4120 0.001036879996 0.510103759992 31 1 31 496 10416
+216	25650 1379 259 4137 0.001006719999 0.510130479991 52 1 52 1378 48230
+217	27029 876 506 4120 0.001036879996 0.510103759992 31 64 1984 31744 42663936
+218	27905 1476 259 4137 0.001006719999 0.510130479991 52 64 3328 88192 197550080
+222	29381 1379 259 4137 0.001006719999 0.510130479991 52 1 52 1378 48230
+227	30760 356 290 2416 0.001013439998 0.001300319994 14 1 14 105 1015
+228	31116 77 437 1430 0.001030159997 0.001160159997 3 1 3 6 14
+229	31193 378 290 2416 0.001013439998 0.001300319994 14 64 896 6720 4157440
+230	31571 82 437 1430 0.001030159997 0.001160159997 3 64 192 384 57344
+234	31653 77 437 1430 0.001030159997 0.001160159997 3 1 3 6 14
+239	31730 358 295 2487 0.001013439998 0.001310319994 14 1 14 105 1015
+240	32088 77 512 1435 0.001040159997 0.001160159997 3 1 3 6 14
+241	32165 380 295 2487 0.001013439998 0.001310319994 14 64 896 6720 4157440
+242	32545 82 512 1435 0.001040159997 0.001160159997 3 64 192 384 57344
+246	32627 77 512 1435 0.001040159997 0.001160159997 3 1 3 6 14
+251	32704 358 300 2576 0.001013439998 0.001320319994 14 1 14 105 1015
+252	33062 77 640 1440 0.001050159997 0.001160159997 3 1 3 6 14
+253	33139 380 300 2576 0.001013439998 0.001320319994 14 64 896 6720 4157440
+254	33519 82 640 1440 0.001050159997 0.001160159997 3 64 192 384 57344
+258	33601 77 640 1440 0.001050159997 0.001160159997 3 1 3 6 14
+263	33678 358 305 2633 0.001013439998 0.001330319994 14 1 14 105 1015
+264	34036 77 721 1485 0.001060159997 0.001167679981 3 1 3 6 14
+265	34113 380 305 2633 0.001013439998 0.001330319994 14 64 896 6720 4157440
+266	34493 82 721 1485 0.001060159997 0.001167679981 3 64 192 384 57344
+270	34575 77 721 1485 0.001060159997 0.001167679981 3 1 3 6 14
+275	34652 949 310 4143 0.001013439998 0.51013719999 36 1 36 666 16206
+276	35601 501 848 4114 0.001070159997 0.510097039993 19 1 19 190 2470
+277	36102 1014 310 4143 0.001013439998 0.51013719999 36 64 2304 42624 66379776
+278	37116 532 848 4114 0.001070159997 0.510097039993 19 64 1216 12160 10117120
+282	37648 501 848 4114 0.001070159997 0.510097039993 19 1 19 190 2470
+289	38149 501 847 4113 0.001070159997 0.510097039993 19 1 19 190 2470
+290	38650 949 311 4144 0.001013439998 0.51013719999 36 1 36 666 16206
+291	39599 532 847 4113 0.001070159997 0.510097039993 19 64 1216 12160 10117120
+292	40131 1014 311 4144 0.001013439998 0.51013719999 36 64 2304 42624 66379776
+296	41145 949 311 4144 0.001013439998 0.51013719999 36 1 36 666 16206
+315	42094 663 1871 2805 0.00121439998 0.00135159997 26 0 3 27 45
+317	42757 1016 1320 4154 0.001151119979 0.510153919989 38 1 38 741 19019
+318	43773 665 1616 4103 0.001181279976 0.510080319994 25 1 25 325 5525
+319	44438 1085 1320 4154 0.001151119979 0.510153919989 38 64 2432 47424 77901824
+320	45523 708 1616 4103 0.001181279976 0.510080319994 25 64 1600 20800 22630400
+324	46231 665 1616 4103 0.001181279976 0.510080319994 25 1 25 325 5525
+354	46896 3337 1322 4157 0.001151119979 0.510153919989 126 0 64 4032 258048
+355	50233 477 1397 4161 0.001157839978 0.510160639988 18 1 18 171 2109
+356	50710 130 1554 4096 0.001174559977 0.510073599995 5 1 5 15 55
+357	50840 506 1397 4161 0.001157839978 0.510160639988 18 64 1152 10944 8638464
+358	51346 139 1554 4096 0.001174559977 0.510073599995 5 64 320 960 225280
+362	51485 130 1554 4096 0.001174559977 0.510073599995 5 1 5 15 55
+367	51615 423 1402 3786 0.001157839978 0.001554719974 16 1 16 136 1496
+368	52038 104 1717 3040 0.001194559977 0.001381759967 4 1 4 10 30
+369	52142 448 1402 3786 0.001157839978 0.001554719974 16 64 1024 8704 6127616
+370	52590 111 1717 3040 0.001194559977 0.001381759967 4 64 256 640 122880
+374	52701 104 1717 3040 0.001194559977 0.001381759967 4 1 4 10 30
+379	52805 423 1407 3850 0.001157839978 0.001574719974 16 1 16 136 1496
+380	53228 104 1875 3178 0.001214559977 0.001398159972 4 1 4 10 30
+381	53332 448 1407 3850 0.001157839978 0.001574719974 16 64 1024 8704 6127616
+382	53780 111 1875 3178 0.001214559977 0.001398159972 4 64 256 640 122880
+386	53891 104 1875 3178 0.001214559977 0.001398159972 4 1 4 10 30
+391	53995 423 1412 3934 0.001157839978 0.001604719974 16 1 16 136 1496
+392	54418 104 1993 3345 0.001234559977 0.001428159972 4 1 4 10 30
+393	54522 448 1412 3934 0.001157839978 0.001604719974 16 64 1024 8704 6127616
+394	54970 111 1993 3345 0.001234559977 0.001428159972 4 64 256 640 122880
+398	55081 104 1993 3345 0.001234559977 0.001428159972 4 1 4 10 30
+403	55185 422 1417 3998 0.001157839978 0.00163159997 16 1 16 136 1496
+404	55607 104 2153 3354 0.001264559977 0.001428159972 4 1 4 10 30
+405	55711 447 1417 3998 0.001157839978 0.00163159997 16 64 1024 8704 6127616
+406	56158 111 2153 3354 0.001264559977 0.001428159972 4 64 256 640 122880
+410	56269 104 2153 3354 0.001264559977 0.001428159972 4 1 4 10 30
+415	56373 421 1422 4033 0.001157839978 0.00165159997 16 1 16 136 1496
+416	56794 104 2402 3485 0.001297999975 0.001458159972 4 1 4 10 30
+417	56898 446 1422 4033 0.001157839978 0.00165159997 16 64 1024 8704 6127616
+418	57344 111 2402 3485 0.001297999975 0.001458159972 4 64 256 640 122880
+422	57455 104 2402 3485 0.001297999975 0.001458159972 4 1 4 10 30
+427	57559 665 1615 4102 0.001181279976 0.510080319994 25 1 25 325 5525
+428	58224 1016 1321 4155 0.001151119979 0.510153919989 38 1 38 741 19019
+429	59240 708 1615 4102 0.001181279976 0.510080319994 25 64 1600 20800 22630400
+430	59948 1085 1321 4155 0.001151119979 0.510153919989 38 64 2432 47424 77901824
+434	61033 1016 1321 4155 0.001151119979 0.510153919989 38 1 38 741 19019
+462	62049 30 1167 1167 0.001123439998 0.001123439998 1 64536 64536 64536 4164895296
+463	62079 30 1167 1167 0.001123439998 0.001123439998 1 64536 64536 64536 4164895296
+464	62109 60 1167 1167 0.001123439998 0.001123439998 2 64537 64537 129074 8330048738
+466	62169 26 1167 1167 0.001123439998 0.001123439998 1 1 1 1 1
+467	62195 52 1167 1951 0.001123439998 0.001225039968 2 0 1 1 1
+468	62247 52 1167 1951 0.001123439998 0.001225039968 2 0 0 0 0
+476	62299 26 1167 1167 0.001123439998 0.001123439998 1 0 0 0 0
+1152	62325 31 1206 1206 0.001133439998 0.001133439998 1 64536 64536 64536 4164895296
+1153	62356 31 1206 1206 0.001133439998 0.001133439998 1 64536 64536 64536 4164895296
+1154	62387 62 1206 1206 0.001133439998 0.001133439998 2 64537 64537 129074 8330048738
+1156	62449 27 1206 1206 0.001133439998 0.001133439998 1 1 1 1 1
+1157	62476 54 1206 2486 0.001133439998 0.001310319994 2 0 1 1 1
+1158	62530 54 1206 2486 0.001133439998 0.001310319994 2 0 0 0 0
+1166	62584 27 1206 1206 0.001133439998 0.001133439998 1 0 0 0 0

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0"?>
+<simcpm>
+	<simparameters>
+	</simparameters>
+	<cpminstall>
+		<sequence>
+			<receive autoname="addr" autoindex="0" op="svcop1">
+				<variables>
+					<variable name="in1" />
+				</variables>
+			</receive>
+			<proc remark="within svcop1" />
+			<reply op="svcop1">
+				<variables>
+					<variable name="out1" />
+				</variables>
+			</reply>
+		</sequence>
+		<sequence>
+			<receive autoname="addr" autoindex="0" op="cmpop1">
+				<variables>
+					<variable name="in1" />
+				</variables>
+			</receive>
+			<proc remark="within cmpop1" />
+			<reply op="cmpop1">
+				<variables>
+					<variable name="out1" />
+				</variables>
+			</reply>
+		</sequence>
+	</cpminstall>
+	<cpmrun>
+		<scope autoname="addr" autoindex="0" remark="top-level">
+			<variables>
+				<variable name="v1" />
+				<variable name="v2" />
+				<variable name="v3" />
+				<variable name="v4" />
+			</variables>
+			<compensationhandler remark="top-level">
+				<non />
+			</compensationhandler>
+			<sequence>
+				<invoke autoname="addr" autoindex="1" op="svcop1">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="1" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke autoname="addr" autoindex="2" op="svcop1">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="2" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke autoname="addr" autoindex="3" op="svcop1" failrate="20">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="3" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke autoname="addr" autoindex="4" op="svcop1" failrate="10">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="4" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke autoname="addr" autoindex="5" op="svcop1">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="5" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke autoname="addr" autoindex="6" op="svcop1">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="6" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke autoname="addr" autoindex="7" op="svcop1">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="7" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke autoname="addr" autoindex="8" op="svcop1">
+					<inputVariables>
+						<variable name="v1" size="100" />
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200" />
+					</outputVariables>
+					<compensationhandler>
+						<invoke autoname="addr" autoindex="8" op="cmpop1">
+							<inputVariables>
+								<variable name="v1" size="100" />
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200" />
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+			</sequence>
+		</scope>
+	</cpmrun>
+</simcpm>

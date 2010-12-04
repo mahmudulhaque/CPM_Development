@@ -1,0 +1,382 @@
+//-------------------------------------------------------------
+// File: cont.cc
+//     (part of OMNeT++ simulation of CPMnet)
+// Author: Weihai Yu
+//-------------------------------------------------------------
+
+
+#include "cont.h"
+
+const long Cont::SVC_MSG_SIZE;
+const long Cont::ACT_MSG_SIZE;
+
+Cont::Cont ( xmlDocPtr cpmdoc, xmlNodePtr elm )
+{
+	set (cpmdoc, elm);
+}
+
+Cont* Cont::set ( xmlDocPtr cpmdoc, xmlNodePtr elm )
+{
+	reset ();
+	doc = cpmdoc;
+	return set (elm);
+}
+
+Cont* Cont::set ( xmlNodePtr elm )
+{
+	domelm = elm;
+	return this;
+}
+
+
+Cont* Cont::reset ()
+{
+	doc = NULL;
+	domelm = NULL;
+	return this;
+}
+
+Cont* Cont::push ( xmlNodePtr elm )
+{
+	if (!elm || !domelm)
+		return this;
+		
+	//ev << "Cont::push: " << (char *)elm->name << endl;
+	
+	// make sure only the last element could be <none>
+	if (domelm->children && xmlStrEqual(elm->name, BAD_CAST _NON) )
+	{
+		xmlFreeNode(elm);
+		return this;
+	}
+		
+	xmlAddChild (domelm, elm);
+	return this;
+}
+
+xmlNodePtr Cont::pop ()
+{
+	xmlNodePtr res = xmlLastElementChild (domelm);
+	if (res)
+		xmlUnlinkNode(res);
+	return res;
+}
+
+
+
+Cont* Cont::trimTill ( xmlNodePtr elm )
+{
+	xmlNodePtr head_elm = pop();
+	while ( head_elm != elm)
+	{
+		xmlFreeNode (head_elm);
+		head_elm = pop();
+	}
+	
+	if ( head_elm )
+		xmlFreeNode (head_elm);
+	else
+		ev << "Cont::trimTill purges the entile continuation!\n";
+	return this;
+}
+
+Cont* Cont::trimTill ( const char *name, const char *prop, long val )
+{
+	xmlNodePtr head_elm = pop();
+	while ( head_elm )
+	{	
+		if ( xmlStrEqual (head_elm->name, BAD_CAST name) )
+		{
+			if ( xmlGetIntProp (head_elm, prop) == val )
+			{
+				xmlFreeNode (head_elm);
+				return this;
+			}
+		}
+		xmlFreeNode (head_elm);
+		head_elm = pop();
+	}
+	return this;
+}
+
+xmlNodePtr Cont::currentBwc ()
+{
+	xmlNodePtr elm = xmlLastElementChild (domelm);
+	while (elm)
+	{
+		if (xmlStrEqual (elm->name, BAD_CAST _EOS)
+			|| xmlStrEqual (elm->name, BAD_CAST _EOI))
+			{
+				// ev << "Cont::currentBwc:\n";
+				// evDumpNode (xmlElementChildByName (elm, _BWC));
+				// ev << "\nParent\n";
+				// evDumpNode (elm);
+				return xmlElementChildByName (elm, _BWC);				
+			}
+		elm = xmlPrevElementSibling (elm);
+	}
+	return NULL;
+}
+
+Cont* Cont::import ( xmlNodePtr foreign_elm )
+{
+	return importWithToggleFlag (foreign_elm, false);
+}
+
+Cont* Cont::importAndToggle ( xmlNodePtr foreign_elm )
+{
+	return importWithToggleFlag (foreign_elm, true);
+}
+
+// import a <c> ..</c> <bwc> ..</bwc>element from another DOMDoc element
+// when toggle==true, turn <c> to <Bwc> or vise versa
+Cont* Cont::importWithToggleFlag ( xmlNodePtr foreign_elm, bool toggle )
+{
+	if (!foreign_elm)
+		return set((xmlNodePtr)NULL);
+
+	xmlNodePtr home_elm = xmlDocCopyNode (foreign_elm, doc, 1);
+	if (toggle)
+	{
+		if (xmlStrEqual (foreign_elm->name, BAD_CAST _C))
+			xmlNodeSetName (home_elm, BAD_CAST _BWC);
+		else
+			xmlNodeSetName (home_elm, BAD_CAST _C);
+	}
+
+	// ev << "Cont::importWithToggleFlag: replacing\n";
+	// evDumpNode (domelm);
+	// ev << "\nwith\n";
+	// evDumpNode (home_elm);
+	// ev << "\n----\n";
+	xmlReplaceNode (domelm, home_elm);
+	xmlFreeNode (domelm);
+	domelm = home_elm;
+	return this;
+}
+
+// replace a <c> ..</c> <bwc> ..</bwc> element with source_elm
+// when toggle==true, turn <c> to <Bwc> or vise versa
+Cont* Cont::replace ( xmlNodePtr source_elm, bool toggle )
+{
+	if (!source_elm)
+		return set((xmlNodePtr)NULL);
+
+	xmlNodePtr new_elm;
+	if (toggle)
+	{
+		if (xmlStrEqual (source_elm->name, BAD_CAST _C))
+			new_elm = xmlNewNode (NULL, BAD_CAST _BWC);
+		else
+			new_elm = xmlNewNode (NULL, BAD_CAST _BWC);
+			
+		for (xmlNodePtr child = xmlFirstElementChild (source_elm);
+			child != NULL; child = xmlNextElementSibling (child))
+		{
+			xmlAddChild (new_elm, xmlCopyNode (child, 1));
+		}
+	}
+	else
+		new_elm = source_elm;
+
+	xmlReplaceNode (domelm, new_elm);
+	xmlFreeNode (domelm);
+	domelm = new_elm;
+	return this;
+}
+
+// concatenate elements of source_elm <c> ..</c> or <bwc> ..</bwc>
+// to the current <c> or <Bwc>
+// unlink source_elm and its elements from the original structure
+Cont* Cont::concatenate ( xmlNodePtr source_elm )
+{
+	if (!source_elm)
+		return this;
+
+	xmlNodePtr curr_child = xmlFirstElementChild (source_elm);
+	xmlNodePtr next_child;
+	while (curr_child)
+	{
+		next_child = xmlNextElementSibling (curr_child);
+		xmlUnlinkNode (curr_child);
+		push (curr_child);
+		curr_child = next_child;
+	}
+	xmlPurgeNode (source_elm);
+
+	return this;
+}
+
+// Replace the current continuation with that of rcvC
+// Replace the <reply> element with eoi_elm
+Cont* Cont::invC ( const xmlChar *op, Cont *rcvC, xmlNodePtr eoi_elm)
+{
+	// ev << "Cont::invC: " << (char *) op << endl;
+	// ev << xmlNodeToStr(eoi_elm) << endl;
+	xmlPurgeChildren (domelm);
+	for (xmlNodePtr elm = xmlFirstElementChild (rcvC->domelm);
+	elm != NULL; elm = xmlNextElementSibling (elm))
+	{
+		if ( xmlStrEqual (elm->name, BAD_CAST _RPL) )
+		{
+			xmlChar *opxstr = xmlGetProp(elm, BAD_CAST _OP);
+			if (xmlStrEqual (opxstr, op))
+				push (eoi_elm);
+			else
+				push (xmlDocCopyNode (elm, doc, 1));
+			xmlFree (opxstr);
+		}
+		else
+		{
+			push (xmlDocCopyNode (elm, doc, 1));
+		}
+	}
+	return this;
+}
+/*
+Cont* Cont::invBwc ( Cont *rcvBwc, DOMElement *eif_elm)
+{
+	// ev << "Cont::invBwc: " << XMLString::transcode(op) << endl;
+	// ev << XMLUtil::toStr(eif_elm) << endl;
+	XMLUtil::removeChildren (domelm);
+	for (DOMElement *elm = XMLUtil::getFirstElementChild (rcvBwc->domelm);
+	elm != NULL; elm = XMLUtil::getNextElementSibling (elm))
+	{
+		push ((DOMElement *) cpmdoc->importNode(elm, true));
+	}
+	push (eif_elm);
+	return this;
+}
+
+Cont* Cont::eosBwc ( long sid, DOMElement *compensate_elm)
+{
+	// ev << "Cont::eosBwc: " << sid << endl;
+	// if (compensate_elm)
+	// 	ev << XMLUtil::toStr(compensate_elm) << endl;
+	// ev << XMLUtil::toStr(domelm) << endl;
+
+	trimTill (X_ESF, X_SID, sid);
+
+	if (compensate_elm)
+	{
+		DOMElement *compensate_act_elm =
+				XMLUtil::getFirstElementChild (compensate_elm);
+		if (compensate_act_elm &&
+		!XMLString::equals (compensate_act_elm->getTagName(), X_NON))
+			push (compensate_act_elm);
+	}
+	return this;
+}
+
+Cont* Cont::eoiInvBwc ( DOMElement *foreign_chl_elm, DOMElement *foreign_eoif_elm)
+{
+	// ev << "Cont::eoiBwc:\n";
+
+	DOMElement *compensate_elm = NULL;
+	if (foreign_chl_elm)
+	{
+		compensate_elm =
+			(DOMElement *) cpmdoc->importNode(foreign_chl_elm, true);
+	}
+
+	// ev << XMLUtil::toStr(domelm) << endl;
+
+	import ( XMLUtil::getFirstElementChild (foreign_eoif_elm) );
+
+	if (compensate_elm)
+	{
+		DOMElement *compensate_act_elm =
+				XMLUtil::getFirstElementChild (compensate_elm);
+		if (compensate_act_elm)
+			push (compensate_act_elm);
+	}
+	return this;
+}
+*/
+long Cont::getBid ()
+{
+	return getBid (xmlLastElementChild (domelm));
+}
+
+long Cont::getBid (xmlNodePtr topelm)
+{
+	for (xmlNodePtr elm = topelm;
+	elm != NULL; elm = xmlPrevElementSibling (elm))
+	{
+		// ev << "====  getBid: " << (char *) elm->name << endl;
+		if ( xmlStrEqual (elm->name, BAD_CAST _JON) )
+		{
+			return xmlGetIntProp (elm, _BID);
+		}
+		if ( xmlStrEqual (elm->name, BAD_CAST _EOI) )
+		{
+			// check if a join element is embedded in c of eoi?
+			long nested_bid =
+				getBid( xmlLastElementChild ( // top of c
+						xmlLastElementChild (elm) )); // c
+			if (nested_bid != -1)
+				return nested_bid;
+		}
+	}
+	return -1;
+}
+
+long Cont::msgSizeC ()
+{
+		return msgSizeC (xmlLastElementChild (domelm));
+}
+
+long Cont::msgSizeC (xmlNodePtr elm)
+{
+	if (elm == NULL) return 0;
+		
+	if (xmlStrEqual (elm->name, BAD_CAST _INV))
+		return sumChildMsgSizeC (xmlElementChildByName(elm, _INS)) + SVC_MSG_SIZE;
+	
+	if (xmlStrEqual (elm->name, BAD_CAST _EOI))
+		return sumChildMsgSizeC (xmlElementChildByName(elm, _OUTS)) + SVC_MSG_SIZE;
+	
+	if (xmlStrEqual (elm->name, BAD_CAST _VAR))
+		return xmlGetIntProp (elm, _SIZE);
+
+	return 0;
+}
+
+long Cont::sumChildMsgSizeC (xmlNodePtr parent)
+{
+	long sz = 0;
+	for (xmlNodePtr child = xmlFirstElementChild (parent);
+		child != NULL; child=xmlNextElementSibling(child))
+		sz += msgSizeC (child);	
+	return sz;	
+}
+
+long Cont::msgSizeD ()
+{
+		return msgSizeD (domelm);
+}
+
+long Cont::msgSizeD (xmlNodePtr elm)
+{
+	if (elm == NULL) return 0;
+	
+	// structured activities/constructs
+	if (xmlStrEqual (elm->name, BAD_CAST _C)
+		|| xmlStrEqual (elm->name, BAD_CAST _BWC)
+		|| xmlStrEqual (elm->name, BAD_CAST _EOS)
+		|| xmlStrEqual (elm->name, BAD_CAST _ESF)
+		|| xmlStrEqual (elm->name, BAD_CAST _EOI)
+		|| xmlStrEqual (elm->name, BAD_CAST _EIF))
+		return sumChildMsgSizeD (elm) + ACT_MSG_SIZE;
+
+	return ACT_MSG_SIZE;
+}
+
+long Cont::sumChildMsgSizeD (xmlNodePtr parent)
+{
+	long sz = 0;
+	for (xmlNodePtr child = xmlFirstElementChild (parent);
+		child != NULL; child=xmlNextElementSibling(child))
+		sz += msgSizeD (child);	
+	return sz;	
+}
