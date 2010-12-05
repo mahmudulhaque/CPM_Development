@@ -269,6 +269,7 @@ void Agent::handleMessage(cMessage *msg)
 				 	{
 				 		case CPM:
 				 		{
+				 			ev <<"cpm is called from handle"<<endl;
 				 			handleCPmessage (msg);
 				 			break;
 				 		}
@@ -276,6 +277,7 @@ void Agent::handleMessage(cMessage *msg)
 
 				 		case SCPM:
 				 		{
+				 			ev <<"scpm is called from handle"<<endl;
 				 			handleSCPmessage (msg);
 				 			break;
 				 		}
@@ -294,7 +296,7 @@ void Agent::handleMessage(cMessage *msg)
 
 		if (msg->getKind()==TCP_I_DATA || msg->getKind()==TCP_I_URGENT_DATA)
 			{
-				ev << "in tcp segment" << endl;
+
 				if(strcmp(msg->getName(), "cpm")==0)
 					{
 						CPmessage *cpmsg = check_and_cast<CPmessage *>(msg);

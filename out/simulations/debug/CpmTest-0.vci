@@ -1,15 +1,15 @@
                                                                 
 version 2
-run CpmTest-0-20101205-22:41:57-47044
+run CpmTest-0-20101205-22:50:35-47155
 attr configname CpmTest
-attr datetime 20101205-22:41:57
+attr datetime 20101205-22:50:35
 attr experiment CpmTest
 attr inifile /Users/mahmudulhaque/Project_simcekk/CPM_INET/src/cpm_debug.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network CPMnet
-attr processid 47044
+attr processid 47155
 attr repetition 0
 attr replication #0
 attr resultdir ../out/simulations/debug
@@ -398,4 +398,55 @@ vector 874  CPMnet.agent[0].tcp  RTO  ETV
 vector 869  CPMnet.agent[0].tcp  cwnd  ETV
 vector 861  CPMnet.agent[0].tcp  "rcvd dupAcks"  ETV
 vector 894  CPMnet.agent[0].tcp  "measured RTT"  ETV
-vector 895  CPMnet.agent[0].tcp  "smoothed RTT
+vector 895  CPMnet.agent[0].tcp  "smoothed RTT"  ETV
+vector 896  CPMnet.agent[0].tcp  RTTVAR  ETV
+vector 897  CPMnet.agent[0].tcp  RTO  ETV
+vector 892  CPMnet.agent[0].tcp  cwnd  ETV
+vector 884  CPMnet.agent[0].tcp  "rcvd dupAcks"  ETV
+vector 1101  CPMnet.agent[0].tcp  "measured RTT"  ETV
+vector 1102  CPMnet.agent[0].tcp  "smoothed RTT"  ETV
+vector 1103  CPMnet.agent[0].tcp  RTTVAR  ETV
+vector 1104  CPMnet.agent[0].tcp  RTO  ETV
+vector 1099  CPMnet.agent[0].tcp  cwnd  ETV
+vector 1091  CPMnet.agent[0].tcp  "rcvd dupAcks"  ETV
+vector 1124  CPMnet.agent[0].tcp  "measured RTT"  ETV
+vector 1125  CPMnet.agent[0].tcp  "smoothed RTT"  ETV
+vector 1126  CPMnet.agent[0].tcp  RTTVAR  ETV
+vector 1127  CPMnet.agent[0].tcp  RTO  ETV
+vector 1122  CPMnet.agent[0].tcp  cwnd  ETV
+vector 1114  CPMnet.agent[0].tcp  "rcvd dupAcks"  ETV
+vector 917  CPMnet.agent[0].tcp  "measured RTT"  ETV
+vector 918  CPMnet.agent[0].tcp  "smoothed RTT"  ETV
+vector 919  CPMnet.agent[0].tcp  RTTVAR  ETV
+vector 920  CPMnet.agent[0].tcp  RTO  ETV
+vector 915  CPMnet.agent[0].tcp  cwnd  ETV
+vector 907  CPMnet.agent[0].tcp  "rcvd dupAcks"  ETV
+vector 1147  CPMnet.agent[0].tcp  "measured RTT"  ETV
+vector 1148  CPMnet.agent[0].tcp  "smoothed RTT"  ETV
+vector 1149  CPMnet.agent[0].tcp  RTTVAR  ETV
+vector 1150  CPMnet.agent[0].tcp  RTO  ETV
+vector 1145  CPMnet.agent[0].tcp  cwnd  ETV
+vector 1137  CPMnet.agent[0].tcp  "rcvd dupAcks"  ETV
+vector 21  CPMnet.agent[0].eth[0].queue  drops  ETV
+vector 985  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1008  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 474  CPMnet.agent[1].tcp  "rcvd oooseg"  ETV
+vector 709  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 801  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1031  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 824  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1054  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 847  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1077  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 870  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 732  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 893  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1100  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 755  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1123  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 916  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 778  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1146  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 1164  CPMnet.agent[1].tcp  "rcvd oooseg"  ETV
+vector 939  CPMnet.agent[0].tcp  ssthresh  ETV
+vector 962  CPMnet.agent[0].tcp  ssthresh  ETV
