@@ -1,14 +1,14 @@
 version 2
-run CpmTest-0-20101204-01:38:19-898
+run CpmTest-0-20101205-19:32:54-1768
 attr configname CpmTest
-attr datetime 20101204-01:38:19
+attr datetime 20101205-19:32:54
 attr experiment CpmTest
 attr inifile /Users/mahmudulhaque/Project_simcekk/CPM_INET/src/cpm_debug.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network CPMnet
-attr processid 898
+attr processid 1768
 attr repetition 0
 attr replication #0
 attr resultdir ../out/simulations/debug

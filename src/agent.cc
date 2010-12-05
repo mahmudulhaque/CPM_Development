@@ -234,7 +234,7 @@ void Agent::initialize()
 
 void Agent::handleMessage(cMessage *msg)
 {
-	ev << "testing msg kind: "<< msg->getKind() << "Message name: " << msg->getName()<< " Sender Module:  " <<msg->getSenderModule() << "Module: "<<msg->getOwner() <<endl;
+	ev << "testing msg kind: "<< msg->getKind() << "Message name: " << msg->getName()<< " Sender Module:  " <<msg->getSenderModule()->getFullName() << "Receiving Module: "<<msg->getArrivalModule()->getFullName() << " Owner Module: " << msg->getOwner()->getFullName() <<endl;
 	//*** for tcp connections
 	if (msg->isSelfMessage())
 	{
