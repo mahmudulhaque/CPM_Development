@@ -83,6 +83,7 @@ int Agent::sendTo ( int dest, cMessage *msg)
 
 	ev << "in the send to function: " << endl;
 	char connectAddress [20];
+	uint32 numBytes;
 	socket.renewSocket();
 	sprintf(connectAddress, "agent[%d]", dest);
 	int connectPort = par("connectPort");
@@ -97,15 +98,18 @@ int Agent::sendTo ( int dest, cMessage *msg)
 					 			CPmessage* cmsg = check_and_cast<CPmessage *>(msg);
 					 			//cmsg->setKind(1);
 					 			//ev<< " Original message sending: ";
+					 			numBytes = (uint32)getParentModule()->getParentModule()->par("cmsg_byte_length");
+					 			cmsg->setByteLength(numBytes);
 					 			ev << " Msg kind: from cpm " << cmsg->getKind()  << endl;
 					 			//socket.send(cmsg);
-					 			socket.send(msg);
+					 			socket.send(cmsg);
 					 			break;
 					 		}
 					 		case SCPM:
 					 		{
 					 			SCPmessage* smsg = check_and_cast<SCPmessage *>(msg);
 					 			ev << " Msg kind: from scpm" << msg->getKind()  << endl;
+					 			smsg->setByteLength(smsg_byte_length);
 					 			socket.send(smsg);
 					 			break;
 					 		}
@@ -114,7 +118,7 @@ int Agent::sendTo ( int dest, cMessage *msg)
 
 
 
-	socket.close();
+	//socket.close();
 	return 1;
 }
 
@@ -227,15 +231,37 @@ void Agent::initialize()
     int receivePort = par("receivePort");
     socketReceive.setOutputGate(gate("tcpOut"));
     socketReceive.bind(address[0] ? IPvXAddress(address) : IPvXAddress(), receivePort);
+    socketReceive.setCallbackObject(this, NULL);
     socketReceive.listen();
 }
-
+void Agent::socketDataArrived(int, void *, cPacket *msg, bool) {
+    ev << "Received TCP data, " << msg->getByteLength() << " bytes\\n";
+    delete msg;
+}
+void Agent::socketFailure(int, void *, int code) {
+    if (code==TCP_I_CONNECTION_RESET)
+        ev << "Connection reset!\\n";
+    else if (code==TCP_I_CONNECTION_REFUSED)
+        ev << "Connection refused!\\n";
+    else if (code==TCP_I_TIMED_OUT)
+        ev << "Connection timed out!\\n";
+}
 
 
 void Agent::handleMessage(cMessage *msg)
 {
-	ev << "testing msg kind: "<< msg->getKind() << "Message name: " << msg->getName()<< " Sender Module:  " <<msg->getSenderModule()->getFullName() << "Receiving Module: "<<msg->getArrivalModule()->getFullName() << " Owner Module: " << msg->getOwner()->getFullName() <<endl;
-	//*** for tcp connections
+	/*
+	if (socketReceive.belongsToSocket(msg))
+		{
+			socketReceive.processMessage(msg);
+
+		}
+	scheduleCPU ();
+	*/
+
+
+	ev <<"Receive socket state: "<< socketReceive.getState() << " testing msg kind: "<< msg->getKind() << "Message name: " << msg->getName()<< " Sender Module:  " <<msg->getSenderModule()->getFullName() << "Receiving Module: "<<msg->getArrivalModule()->getFullName() << " Owner Module: " << msg->getOwner()->getFullName() <<endl;
+	//for tcp connections
 	if (msg->isSelfMessage())
 	{
 		ev << "in handle message" << endl;
@@ -260,71 +286,48 @@ void Agent::handleMessage(cMessage *msg)
 				 	}
 
 	}
-	else if (strcmp(msg->getName(), "cpm")==0)
+
+
+	else if (strcmp(msg->getName(), "cpm")==0||strcmp(msg->getName(), "scpm")==0)
 	{
 		ev << "Message name in else if: " << msg->getName() <<endl;
 
-	if (msg->getKind()==TCP_I_DATA || msg->getKind()==TCP_I_URGENT_DATA)
-	    {
-			ev << "in tcp segment" << endl;
-	        while(1)
-	        {
-	        	ev << "entering in the loop" << endl;
-			CPmessage *cpmsg = dynamic_cast<CPmessage *>(msg);
-	        if (cpmsg)
-	        {
-	        	handleCPmessage(cpmsg);
-	        	break;
-	        }
+		if (msg->getKind()==TCP_I_DATA || msg->getKind()==TCP_I_URGENT_DATA)
+			{
+				ev << "in tcp segment" << endl;
+				if(strcmp(msg->getName(), "cpm")==0)
+					{
+						CPmessage *cpmsg = check_and_cast<CPmessage *>(msg);
+						if (cpmsg)
+							{
+								handleCPmessage(cpmsg);
+								ev<< "successfull in cpm " << endl;
 
-	        SCPmessage *scpmsg = dynamic_cast<SCPmessage *>(msg);
-	        if (scpmsg)
-	        	        {
+							}
+					}
+				else
+					{
+
+						SCPmessage *scpmsg = check_and_cast<SCPmessage *>(msg);
+						if (scpmsg)
+							{
 	        	        	handleSCPmessage(scpmsg);
-	        	        	break;
-	        	        }
-	        //else
-	        	//delete msg;
+	        	        	ev<< "successfull in scpm " << endl;
 
-	        }
+							}
+					}
 
 
-	    }
+			}
 
 
 	}
 	 else
 	    {
 
-
-
-		 // some indication -- ignore
-		//ev << "msg deleting" << endl;
-	     // delete msg;
 	    }
 
 
-	//***
-
-
-	/*
-	switch (msg->getKind())
-	{
-		case CPM:
-		{
-			handleCPmessage (msg);
-			break;
-		}
-		case SCPM:
-		{
-			handleSCPmessage (msg);
-			break;
-		}
-		default:
-		{
-			ev << "Agent::handleMessage: unknown message type!\n";
-		}
-	}*/
 
 	scheduleCPU ();
 }

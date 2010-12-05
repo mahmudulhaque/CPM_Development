@@ -26,7 +26,7 @@
 
 // #include "SCPmessageHandler.h"
 
-class Agent : public cSimpleModule
+class Agent : public cSimpleModule,  public TCPSocket::CallbackInterface
 {
   public:
     Agent();
@@ -66,7 +66,8 @@ class Agent : public cSimpleModule
     TCPSocketMap socketMap;
     TCPSocket socketReceive;
     TCPSocket socket;
-
+    virtual void socketDataArrived(int connId, void *yourPtr, cPacket *msg, bool urgent);
+    virtual void socketFailure(int, void *, int code);
     // statistics
     int numSessions;
     int numBroken;
