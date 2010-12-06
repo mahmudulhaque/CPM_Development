@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for CPM_INET
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/simulations -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/simulations/debug -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/gcc-debug -I/usr/include/libxml2 -I../../inet/src/networklayer/ipv4 -I../../inet/src/networklayer/common -I../../inet/src/networklayer/rsvp_te -I../../inet/src/networklayer/icmpv6 -I../../inet/src/transport/tcp -I../../inet/src/networklayer/mpls -I../../inet/src/base -I../../inet/src/networklayer/ted -I../../inet/src/util/headerserializers -I../../inet/src/networklayer/contract -I../../inet/src/util -I../../inet/src/transport/contract -I../../inet/src/linklayer/mfcore -I../../inet/src/transport/sctp -I../../inet/src/networklayer/ipv6 -I../../inet/src/applications/tcpapp -I../../inet/src/world -I../../inet/src/applications/pingapp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -I../../inet/src/networklayer/ldp -I../../inet/src/transport/udp -L../../inet/out/$(CONFIGNAME)/src -lxml2 -linet -KINET_PROJ=../../inet
+#  opp_makemake -f --deep -I/usr/include/libxml2 -I../../inet/src/networklayer/ipv4 -I../../inet/src/networklayer/common -I../../inet/src/networklayer/rsvp_te -I../../inet/src/networklayer/icmpv6 -I../../inet/src/transport/tcp -I../../inet/src/networklayer/mpls -I../../inet/src/base -I../../inet/src/networklayer/ted -I../../inet/src/util/headerserializers -I../../inet/src/networklayer/contract -I../../inet/src/util -I../../inet/src/transport/contract -I../../inet/src/linklayer/mfcore -I../../inet/src/transport/sctp -I../../inet/src/networklayer/ipv6 -I../../inet/src/applications/tcpapp -I../../inet/src/world -I../../inet/src/applications/pingapp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -I../../inet/src/networklayer/ldp -I../../inet/src/transport/udp -L../../inet/out/$(CONFIGNAME)/src -lxml2 -linet -KINET_PROJ=../../inet
 #
 
 # Name of target to be created (-o option)
@@ -15,10 +15,6 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
 
 # C++ include paths (with -I)
 INCLUDE_PATH = \
-    -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out \
-    -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/simulations \
-    -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/simulations/debug \
-    -I/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/gcc-debug \
     -I/usr/include/libxml2 \
     -I../../inet/src/networklayer/ipv4 \
     -I../../inet/src/networklayer/common \

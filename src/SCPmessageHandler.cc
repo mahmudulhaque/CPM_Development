@@ -90,7 +90,10 @@ SCPmessageHandler* SCPmessageHandler::forward (int remote_id)
 	setDest (remote_id);
 	setProcessed (false);
 	smsg->setByteLength (agent->smsg_byte_length);
-	agent->send (smsg, "to_agent", remote_id);
+	//agent->send (smsg, "to_agent", remote_id);
+	//for tcp connections
+	ev << "forward is called from scpm" << endl;
+	agent->sendTo(remote_id, smsg);
 	return this;
 }
 

@@ -338,7 +338,7 @@ CPmessageHandler* CPmessageHandler::forward (int remote_id)
 	setSrc (agent->Id());
 	setDest (remote_id);
 	setInterpreted (false);
-	ev << "forward is called " << endl;
+	ev << "forward is called from cpm" << endl;
 	agent->sendTo (remote_id, cmsg);
 
 	return this;

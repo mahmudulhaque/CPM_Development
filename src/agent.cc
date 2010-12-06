@@ -89,7 +89,7 @@ int Agent::sendTo ( int dest, cMessage *msg)
 	int connectPort = par("connectPort");
 	socket.setOutputGate(gate("tcpOut"));
 	socket.connect(IPAddressResolver().resolve(connectAddress), connectPort);
-	ev << "sending to: " << IPAddressResolver().resolve(connectAddress) << " connecting port: "<< connectPort << "socket status: "<< socket.getState();
+	ev << "sending to: " << IPAddressResolver().resolve(connectAddress) << " connecting port: "<< connectPort << "socket status: "<< socket.getState()<< " msg kind: " << msg->getKind() ;
 
 	switch (msg->getKind())
 					 	{
@@ -265,7 +265,7 @@ void Agent::handleMessage(cMessage *msg)
 	if (msg->isSelfMessage())
 	{
 		ev << "in handle message" << endl;
-		switch (msg->getKind())
+		/*switch (msg->getKind())
 				 	{
 				 		case CPM:
 				 		{
@@ -286,6 +286,17 @@ void Agent::handleMessage(cMessage *msg)
 				 			ev << "Agent::handleMessage: unknown message type!\n";
 				 		}
 				 	}
+				 	*/
+		if (strcmp(msg->getName(), "cpm")==0)
+		{
+			ev <<"cpm is called from handle"<<endl;
+			handleCPmessage (msg);
+		}
+		else if (strcmp(msg->getName(), "scpm")==0)
+				{
+					ev <<"scpm is called from handle"<<endl;
+					handleSCPmessage (msg);
+				}
 
 	}
 
@@ -307,7 +318,7 @@ void Agent::handleMessage(cMessage *msg)
 
 							}
 					}
-				else
+				else if (strcmp(msg->getName(), "scpm")==0)
 					{
 
 						SCPmessage *scpmsg = check_and_cast<SCPmessage *>(msg);
