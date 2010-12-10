@@ -322,7 +322,9 @@ CPmessageHandler* CPmessageHandler::insertAgentVisited (int agent_addr)
 
 bool CPmessageHandler::fromLocal () const
 {
-	return (getSrc() == agent->Id());
+	ev << "CPmessageHandler:: src: " << getSrc() << "Agent's id:  " << agent->getParentModule()->getIndex() << endl;
+	//return (getSrc() == agent->Id());
+	return (getSrc()==agent->getParentModule()->getIndex());
 }
 
 CPmessageHandler* CPmessageHandler::forward (int remote_id)
@@ -338,7 +340,7 @@ CPmessageHandler* CPmessageHandler::forward (int remote_id)
 	setSrc (agent->Id());
 	setDest (remote_id);
 	setInterpreted (false);
-	ev << "forward is called from cpm" << endl;
+	ev << "CPmessageHandler::forward is called from agent: " << agent->Id() << " and send to: " << remote_id << endl;
 	agent->sendTo (remote_id, cmsg);
 
 	return this;

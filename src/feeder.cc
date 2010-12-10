@@ -323,10 +323,14 @@ void Feeder::initialize ()
 					xmlFree (cpmxstr);
 					xmlFreeNode (this_child);
 					xmlFreeDoc (cpmdoc);
-					scheduleAt (0.0, cmsg);
+					scheduleAt (5.0, cmsg);
+					//break;
 				}
 			}
 		}
+
+
+
 		if (xmlStrEqual(child->name, BAD_CAST _CPMRUN))
 		{
 			ev << "Feeder::initialize: cpmrun ";
@@ -344,13 +348,15 @@ void Feeder::initialize ()
 			for (int flow_i = 1; flow_i <= (num_servers*mpl)/flow_num_branches; flow_i++)
 			{
 				ev << "Calling runcpm with: "<< flow_i*flow_ia_time/mpl << endl;
-				runCpm (0.5 + flow_i*flow_ia_time/mpl);
+				runCpm (10.5 + flow_i*flow_ia_time/mpl);
 				if (debugging)
 					return; // run only one flow for debugging
 			}
 			xmlFree(cpmxstr_run);
 			xmlFreeDoc(cpmdoc_run);
 		}
+
+
 	}
 }
 

@@ -151,19 +151,22 @@ $O/cpmcommon.o: cpmcommon.cc \
 $O/scpact.o: scpact.cc \
 	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	cpmsite.h \
 	agent.h \
 	environ.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	cont.h \
-	SCPmessage_m.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	SCPmessage_m.h \
 	cpmcommon.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
 	CPmessageHandler.h \
@@ -184,18 +187,21 @@ $O/CPmessageHandler.o: CPmessageHandler.cc \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
 	cpmsite.h \
 	agent.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	environ.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	cont.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	SCPmessage_m.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
 	cpmcommon.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
@@ -213,18 +219,21 @@ $O/feeder.o: feeder.cc \
 	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
 	cpmsite.h \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	agent.h \
 	environ.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	cont.h \
-	SCPmessage_m.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	SCPmessage_m.h \
 	cpmcommon.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
 	CPmessageHandler.h \
@@ -234,8 +243,8 @@ $O/feeder.o: feeder.cc \
 	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
 	$(INET_PROJ)/src/base/NotifierConsts.h \
 	CPmessage_m.h \
-	feeder.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	feeder.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
 	cpm.h \
@@ -246,11 +255,13 @@ $O/SCPmessageHandler.o: SCPmessageHandler.cc \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
 	cpmsite.h \
 	agent.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	environ.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	cont.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
 	SCPmessage_m.h \
 	cpmcommon.h \
@@ -258,6 +269,7 @@ $O/SCPmessageHandler.o: SCPmessageHandler.cc \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
@@ -274,19 +286,22 @@ $O/SCPmessageHandler.o: SCPmessageHandler.cc \
 $O/cpmsite.o: cpmsite.cc \
 	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	agent.h \
 	cpmsite.h \
 	environ.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	cont.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	SCPmessage_m.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
 	cpmcommon.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
 	CPmessageHandler.h \
@@ -314,12 +329,14 @@ $O/CPmessage_m.o: CPmessage_m.cc \
 	CPmessage_m.h
 $O/cpm.o: cpm.cc \
 	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
 	cpmsite.h \
 	agent.h \
 	environ.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	cont.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
@@ -329,6 +346,7 @@ $O/cpm.o: cpm.cc \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
@@ -348,18 +366,21 @@ $O/agent.o: agent.cc \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
 	cpmsite.h \
 	agent.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	environ.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	cont.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
 	SCPmessage_m.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
 	cpmcommon.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \

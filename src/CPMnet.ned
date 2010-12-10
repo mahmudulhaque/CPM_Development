@@ -121,7 +121,8 @@ network CPMnet
                // from_agent[num_agents];
          //}
          // working agents on StandardHost 
-        agent[num_agents]: StandardHost {
+        agent[num_agents]: StandardAgent {
+            
             //@display("p=52,112,ring,80,80;i=device/pc2");
              //@display("i=device/server,blue;p=20,100,ring,200,100");
 

@@ -61,7 +61,7 @@ string MsgQueue::dump()
 	for (it = msgq.begin(); it != msgq.end(); it++)
 	{
 		stm << "==>>";
-		switch ((*it)->getKind())
+		/*switch ((*it)->getKind())
 		{
 			case CPM:
 			{
@@ -74,7 +74,18 @@ string MsgQueue::dump()
 				break;
 			}
 
+		}*/
+		if (strcmp((*it)->getName(), "cpm")==0)
+		{
+			stm << (check_and_cast<CPmessage *>(*it))->getCpm() << "\n\n";
+
 		}
+		else if (strcmp((*it)->getName(), "scpm")==0)
+		{
+			stm << (check_and_cast<SCPmessage *>(*it))->getCmd() << "\n\n";
+
+		}
+
 	}
 	stm << "==== ==== ==== ====\n";
 	return stm.str();
