@@ -356,7 +356,16 @@ CPmessageHandler* CPmessageHandler::terminate ()
 		return this;
 	}
 	setSrc (agent->Id());
-	agent->send (cmsg, "to_sink");
+	ev<<"CPmessageHandler:: last agent visited: " << agent->Id() << endl;
+	//need to modify here...
+	//agent->sendDirect(cmsg, from_sink);
+	 cModule *sink_data = agent->getParentModule()->getParentModule()->getSubmodule("sink");
+	 agent->sendDirect(cmsg,sink_data, "from_agent");
+	 //ev<<"CPmessageHandler:: sink is "<< sink->getFullName()<<endl;
+	//cModule *mod = getp
+
+
+
 	return this;
 }
 

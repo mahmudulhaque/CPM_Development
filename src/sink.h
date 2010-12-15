@@ -10,11 +10,11 @@
 
 #include "cpmcommon.h"
 
-class Sink : public cSimpleModule
+class Sinkone : public cSimpleModule
 {
   public:
-    Sink();
-    virtual ~Sink();
+    Sinkone();
+    virtual ~Sinkone();
 
   protected:
     virtual void initialize();

@@ -749,7 +749,7 @@ void Cpm::rollBack ()
 
 void Cpm::terminate ()
 {
-	ev << "terminate called" << endl;
+	ev << "CPM::terminate called" << endl;
 	refreshMsgH()->terminate();
 	leave();
 }

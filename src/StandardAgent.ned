@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package cpm.src;
+package CPM_INET.src;
 
 import inet.nodes.inet.NetworkLayer;
 
@@ -57,6 +57,7 @@ module StandardAgent
     gates:
         inout pppg[] @labels(PPPFrame-conn);
         inout ethg[] @labels(EtherFrame-conn);
+        output to_sink;
     submodules:
         namTrace: NAMTraceWriter {
             parameters:

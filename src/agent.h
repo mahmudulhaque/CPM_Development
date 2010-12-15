@@ -32,7 +32,8 @@ class Agent : public cSimpleModule,  public TCPSocket::CallbackInterface
     Agent();
     virtual ~Agent();
 
-	int Id() const { return id; };
+	//int Id() const { return id; };
+    int Id() const { return getParentModule()->getIndex(); };
 	CPMsite* Site () const { return site; };
 	//int sendTo ( int dest, cPacket *msg);
 	int sendTo ( int dest, cMessage *msg);

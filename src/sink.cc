@@ -11,9 +11,10 @@
 #include "sink.h"
 
 
-Define_Module(Sink);
+//Define_Module(Sink);
+Define_Module(Sinkone);
 
-Sink::Sink()
+Sinkone::Sinkone()
 {
 	num_done = 0;
 	num_rolledback = 0;
@@ -40,11 +41,11 @@ Sink::Sink()
 	record_started = false;
 }
 
-Sink::~Sink()
+Sinkone::~Sinkone()
 {
 }
 
-bool Sink::recordStarted ()
+bool Sinkone::recordStarted ()
 {
 	if (!record_started)
 	{
@@ -56,7 +57,7 @@ bool Sink::recordStarted ()
 	return true;
 }
 
-void Sink::initialize()
+void Sinkone::initialize()
 {
 	// CPMnet parameters
 	feeder = getParentModule()->getSubmodule("feeder")->gate("from_sink");
@@ -85,7 +86,7 @@ void Sink::initialize()
 	rec_t_hist.setRangeAutoUpper(0, 50, 1.6);
 }
 
-void Sink::handleMessage(cMessage *msg)
+void Sinkone::handleMessage(cMessage *msg)
 {
 	CPmessage *cmsg = check_and_cast<CPmessage *>(msg);
 	simtime_t e2e_delay = simTime() - cmsg->getStartTime();
@@ -164,7 +165,7 @@ void Sink::handleMessage(cMessage *msg)
 		// 	delete cmsg;
 		// 	return;
 		// }
-		sendDirect ( cmsg, feeder );
+		//sendDirect ( cmsg, feeder );
 	}
 	else
 	{
@@ -175,7 +176,7 @@ void Sink::handleMessage(cMessage *msg)
 	}
 }
 
-void Sink::finish ()
+void Sinkone::finish ()
 {
 	ev << "Sink: " << num_servers << " servers, ";
 	if (num_engines == 0)

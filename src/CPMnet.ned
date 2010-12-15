@@ -17,7 +17,7 @@
 //
 // A sink collects results
 //
-package cpm.src;
+package CPM_INET.src;
 
 
 // Agent --
@@ -36,7 +36,8 @@ import ned.DatarateChannel;
 import inet.networklayer.autorouting.FlatNetworkConfigurator;
 import inet.applications.tcpapp.TCPApp;
 import inet.nodes.ethernet.EtherSwitch;
-import cpm.src.Feeder;
+import CPM_INET.src.Feeder;
+import CPM_INET.src.Sinkone;
 
 channel InterProc extends ned.DatarateChannel
 {
@@ -49,8 +50,8 @@ channel InterProc extends ned.DatarateChannel
 channel IntraLan extends ned.DatarateChannel
 {
     parameters:
-      //  delay = normal(1ms, 0.0001);
-		delay = 1ms;
+        //  delay = normal(1ms, 0.0001);
+        delay = 1ms;
         ber = 0;
         datarate = 100Mbps;
 }
@@ -58,8 +59,8 @@ channel IntraLan extends ned.DatarateChannel
 channel InterLan extends ned.DatarateChannel
 {
     parameters:
-      //  delay = normal(5ms, 0.0001);
-		delay = 50ms;
+        //  delay = normal(5ms, 0.0001);
+        delay = 50ms;
         ber = 0;
         datarate = 10Mbps;
 }
@@ -73,7 +74,7 @@ network CPMnet
         bool instantiate; // whether to instantiate for decentralization
         int num_engines; // 0 for decentralized
 		// time for dispatching to engine when centralized with multiple engine,
-        volatile double engine_dispatch_time @unit(ms); 
+        volatile double engine_dispatch_time @unit(ms);
         string cpm_file;
         int num_agents;
         int agent_dups; // number of servers = (num_agents-1)*agent_dups
@@ -103,15 +104,19 @@ network CPMnet
 		//sink: Sink {
 		  //  parameters:
 		    //    @display("i=block/process,gold;p=360,80");
-		
-		
+
+
 		//    gates:
 		 //       from_agent[num_agents];
-		//}
-		// sink will also be on top of StandardHost
-		sink: StandardHost{
-		}
-		
+        //}
+        // sink will also be on top of StandardHost
+        sink: Sinkone {
+           @display("i=block/process,cyan;p=300,300");
+            //@display("p=539,214");
+            gates:
+		        from_agent;
+        }
+
        // agent[num_agents]: Agent {
          //   parameters:
            //     @display("i=device/server,blue;p=20,100,ring,200,100");
@@ -121,12 +126,7 @@ network CPMnet
                // from_agent[num_agents];
          //}
          // working agents on StandardHost 
-        agent[num_agents]: StandardAgent {
-            
-            //@display("p=52,112,ring,80,80;i=device/pc2");
-             //@display("i=device/server,blue;p=20,100,ring,200,100");
-
-        }
+        agent[num_agents]: StandardAgent;
         switch1: EtherSwitch {
             @display("p=75,142");
         }
@@ -142,28 +142,31 @@ network CPMnet
     connections allowunconnected:
 
 	    // TODO: more realistic connections than all-connected??
-       
+
        // for i=0..num_agents-1, for j=0..num_agents-1 {
          //   agent[i].to_agent[j] --> InterLan --> agent[j].from_agent[i];
         //}
-        
+
         //for i=0..num_agents-1, for j=0..num_agents-1 {
           //  agent[i].to_agent[j] --> InterLan --> agent[j].from_agent[i];
         //}
-       
+
      //   for i=0..num_agents-1 {
            // agent[i].to_sink --> {  delay = 0s; } --> sink.from_agent[i];
        // }
-       
+
        // connecting with switch and routers
-       
-       for i=0..(num_agents/2-1) {
+
+        for i=0..(num_agents/2-1) {
             agent[i].ethg++ <--> switch1.ethg++;
         }
         for i=((num_agents)/2)..num_agents-1 {
             agent[i].ethg++ <--> switch3.ethg++;
         }
-        sink.ethg++ <--> switch2.ethg++;
+        //for i=0..num_agents-1 {
+          //  agent[i].to_sink --> {  delay = 0s; } --> sink.from_agent[i];
+        //}
+        //sink.ethg++ <--> switch2.ethg++;
         router.ethg++ <--> switch1.ethg++;
         router.ethg++ <--> switch2.ethg++;
         router.ethg++ <--> switch3.ethg++;

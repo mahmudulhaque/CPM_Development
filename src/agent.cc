@@ -117,7 +117,7 @@ int Agent::sendTo ( int dest, cMessage *msg)
 
 					 	}
 	*/
-	if (strcmp(msg->getName(), "cpm")==0)
+	if (strcmp(msg->getName(), _CPM)==0)
 	{
 		CPmessage* cmsg = check_and_cast<CPmessage *>(msg);
 		numBytes = (uint32)getParentModule()->getParentModule()->par("cmsg_byte_length");
@@ -126,7 +126,7 @@ int Agent::sendTo ( int dest, cMessage *msg)
 		socket.send(cmsg);
 
 	}
-	else if (strcmp(msg->getName(), "scpm")==0)
+	else if (strcmp(msg->getName(), _SCPM)==0)
 	{
 		SCPmessage* smsg = check_and_cast<SCPmessage *>(msg);
 		ev << " Msg kind: from scpm" << msg->getKind()  << endl;
@@ -306,13 +306,13 @@ void Agent::handleMessage(cMessage *msg)
 				 		}
 				 	}
 				 	*/
-		if (strcmp(msg->getName(), "cpm")==0)
+		if (strcmp(msg->getName(), _CPM)==0)
 			{
 				ev <<"Agent::cpm is called from handle"<<endl;
 				ev << ((CPmessage *)msg)->getCpm()<< endl;
 				handleCPmessage (msg);
 			}
-		else if (strcmp(msg->getName(), "scpm")==0)
+		else if (strcmp(msg->getName(), _SCPM)==0)
 				{
 					ev <<"Agent::scpm is called from handle"<<endl;
 					handleSCPmessage (msg);
@@ -321,7 +321,7 @@ void Agent::handleMessage(cMessage *msg)
 	}
 
 
-	else if (strcmp(msg->getName(), "cpm")==0||strcmp(msg->getName(), "scpm")==0)
+	else if (strcmp(msg->getName(), _CPM)==0||strcmp(msg->getName(), _SCPM)==0)
 	{
 		ev << "Agent::Message name in else if: " << msg->getName() <<endl;
 
@@ -329,7 +329,7 @@ void Agent::handleMessage(cMessage *msg)
 			{
 				msg->removeControlInfo();
 
-				if(strcmp(msg->getName(), "cpm")==0)
+				if(strcmp(msg->getName(), _CPM)==0)
 					{
 						CPmessage *cpmsg = check_and_cast<CPmessage *>(msg);
 						if (cpmsg)
@@ -342,7 +342,7 @@ void Agent::handleMessage(cMessage *msg)
 
 							}
 					}
-				else if (strcmp(msg->getName(), "scpm")==0)
+				else if (strcmp(msg->getName(), _SCPM)==0)
 					{
 
 						SCPmessage *scpmsg = check_and_cast<SCPmessage *>(msg);
@@ -475,7 +475,7 @@ void Agent::scheduleCPU ()
 		cpu_vec.record(num_cpus_busy);
 		ev << "Agent[" << getParentModule()->getIndex() << "]: use a CPU. Now ";
 		ev << num_cpus_busy << " busy" << endl;
-		if (strcmp(msg->getName(), "cpm")==0)
+		if (strcmp(msg->getName(), _CPM)==0)
 			{
 				cmsgh->set (msg);
 				ev << "Agent[" << getParentModule()->getIndex() << "]: dequeued\n" ;
@@ -488,7 +488,7 @@ void Agent::scheduleCPU ()
 				//scheduleAt (simTime() + interpret_time*truncnormal(0.5, 0.1),cmsgh->Msg());
 				//scheduleAt (simTime() + interpret_time*truncnormal(1, 0.1),cmsgh->Msg());
 			}
-		else if (strcmp(msg->getName(), "scpm")==0)
+		else if (strcmp(msg->getName(), _SCPM)==0)
 			{
 				// code copied from cmsgh->increaseQueueTime(), bad style
 				simtime_t delta = simTime() - msg->getTimestamp();

@@ -27,6 +27,7 @@
 enum msgType { CPM, SCPM };
 
 const char _CPM[] = "cpm";
+
 const char _CPMINSTALL[] = "cpminstall";
 const char _CPMRUN[] = "cpmrun";
 

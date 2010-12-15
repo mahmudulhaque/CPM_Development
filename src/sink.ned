@@ -13,11 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package cpm.src;
+package CPM_INET.src;
 
 
-simple Sink
+simple Sinkone
 {
     gates:
-        input from_agent[];
+        input from_agent;
 }

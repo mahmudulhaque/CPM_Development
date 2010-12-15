@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-package cpm.src;
+package CPM_INET.src;
 
 simple Feeder
 {
