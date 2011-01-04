@@ -154,6 +154,7 @@ bool Agent::serviceOk (bool is_rollingback, double svc_failrate)
 {
 	// rollback always succeeds
 	// normal processing succeeds when both site and svc are ok
+
 	return (is_rollingback ||
 			uniform (0.0, 1.0) <= (1.0 - site_failrate)*(1.0 - svc_failrate));
 }
@@ -161,12 +162,15 @@ bool Agent::serviceOk (bool is_rollingback, double svc_failrate)
 void Agent::processSvc (CPmessageHandler *msgh, double svc_failrate)
 {
 	msgh->setProcessed (true);
+	ev<< "Agent::processSvc " << "Agent["<<getParentModule()->getIndex()<<"]"<< "Service fail rate: "<< svc_failrate <<endl;
 	if (serviceOk(msgh->getRollingback(), svc_failrate))
 	{
+		ev<< "Agent::processSvc is okay" <<endl;
 		scheduleAt (simTime() + proc_time*normal(1, 0.2), msgh->Msg());
 	}
 	else
 	{	
+		ev<< "Agent::processSvc is not okay" <<endl;
 		// the service just failed
 		msgh->setFailed(true);
 		scheduleAt (simTime() + fail_detection_time*normal(1, 0.2),

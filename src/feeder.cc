@@ -177,7 +177,7 @@ xmlDocPtr Feeder::makeCpmDoc (xmlNodePtr node)
 void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 {
 	int autoindex[flow_size+1];
-
+	ev << "Feeder::runcpm" << endl;
 	int autosize;
 	bool is_first_in_repeat, is_last_in_repeat;
 
@@ -211,9 +211,12 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 	else
 	{
 		autosize = cmsg->getNumSites();
+		ev << "Feeder::runcpm index from runcpm " << endl;
 		for (int i = 0; i < autosize; i++)
 		{
 			autoindex[i] = cmsg->getSites(i);
+			ev << cmsg->getSites(i) << "," ;
+
 		}
 	}
 
@@ -335,7 +338,7 @@ void Feeder::initialize ()
 					xmlFree (cpmxstr);
 					xmlFreeNode (this_child);
 					xmlFreeDoc (cpmdoc);
-					scheduleAt (5.0, cmsg);
+					scheduleAt (0.0, cmsg);
 					//break;
 				}
 			}
@@ -360,7 +363,7 @@ void Feeder::initialize ()
 			for (int flow_i = 1; flow_i <= (num_servers*mpl)/flow_num_branches; flow_i++)
 			{
 				ev << "Calling runcpm with: "<< flow_i*flow_ia_time/mpl << endl;
-				runCpm (10.5 + flow_i*flow_ia_time/mpl);
+				runCpm (0.5 + flow_i*flow_ia_time/mpl);
 				if (debugging)
 					return; // run only one flow for debugging
 			}
@@ -386,6 +389,7 @@ void Feeder::handleMessage(cMessage *msg)
 	}
 	else
 	{
+		ev<< "Feeder::handle message" <<endl;
 		runCpm (simTime(), cmsg);
 		delete msg;
 	}
