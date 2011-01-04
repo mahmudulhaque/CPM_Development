@@ -519,7 +519,7 @@ void Agent::finish ()
 	delete site;
 	delete[] agents;
 	delete[] channels;
-	if (id>2) return;
+	//if (id>2) return;
 	// only report the first 3 agents
 	ev << "Agent[" << getParentModule()->getIndex() << "]:\n";
 	ev << num_processed_cmsg << "   processed, total time: " << total_proc_time;

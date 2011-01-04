@@ -195,6 +195,17 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 	if (is_first_in_repeat)
 	{
 		generateRandomIndex (flow_size + 1, autoindex);
+		/*
+		autoindex[0] = 1;
+		autoindex[1] = 2;
+		autoindex[2] = 3;
+		autoindex[3] = 4;
+		autoindex[4] = 5;
+		autoindex[5] = 6;
+		autoindex[6] = 7;
+		autoindex[7] = 8;
+		autoindex[8] = 9;
+		*/
 		autosize = flow_size + 1;
 	}
 	else
@@ -224,6 +235,7 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 	CPmessage *runcmsg = new CPmessage (_CPM, CPM);
 	xmlChar *cpmxstr = xmlDocToXstr (cpmdoc);
 	runcmsg->setCpm((char *)cpmxstr);
+	ev<<"Feeder::" << "Runcpm: " << (char *)cpmxstr << endl;
 	xmlFreeDoc (cpmdoc);
 	xmlFree (cpmxstr);
 

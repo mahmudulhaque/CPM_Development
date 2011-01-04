@@ -160,12 +160,12 @@ void Sinkone::handleMessage(cMessage *msg)
 			}
 		}
 
-		// if (debugging)
-		// {
-		// 	delete cmsg;
-		// 	return;
-		// }
-		//sendDirect ( cmsg, feeder );
+		 //if (debugging)
+		 //{
+		 	//delete cmsg;
+			//return;
+		 //}
+		sendDirect ( cmsg, feeder );
 	}
 	else
 	{

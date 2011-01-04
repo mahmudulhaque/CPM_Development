@@ -111,7 +111,7 @@ network CPMnet
         //}
         // sink will also be on top of StandardHost
         sink: Sinkone {
-           @display("i=block/process,cyan;p=300,300");
+           @display("i=block/process,cyan;p=450,20");
             //@display("p=539,214");
             gates:
 		        from_agent;
