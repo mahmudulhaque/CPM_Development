@@ -194,8 +194,8 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 
 	if (is_first_in_repeat)
 	{
-		generateRandomIndex (flow_size + 1, autoindex);
-		/*
+		//generateRandomIndex (flow_size + 1, autoindex);
+		// while agent [0..4] remain in single network and agent[5..10] remain in different network
 		autoindex[0] = 1;
 		autoindex[1] = 2;
 		autoindex[2] = 3;
@@ -205,7 +205,7 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 		autoindex[6] = 7;
 		autoindex[7] = 8;
 		autoindex[8] = 9;
-		*/
+
 		autosize = flow_size + 1;
 	}
 	else
@@ -338,7 +338,7 @@ void Feeder::initialize ()
 					xmlFree (cpmxstr);
 					xmlFreeNode (this_child);
 					xmlFreeDoc (cpmdoc);
-					scheduleAt (0.0, cmsg);
+					scheduleAt (5.0, cmsg);
 					//break;
 				}
 			}
@@ -363,7 +363,7 @@ void Feeder::initialize ()
 			for (int flow_i = 1; flow_i <= (num_servers*mpl)/flow_num_branches; flow_i++)
 			{
 				ev << "Calling runcpm with: "<< flow_i*flow_ia_time/mpl << endl;
-				runCpm (0.5 + flow_i*flow_ia_time/mpl);
+				runCpm (10.5 + flow_i*flow_ia_time/mpl);
 				if (debugging)
 					return; // run only one flow for debugging
 			}

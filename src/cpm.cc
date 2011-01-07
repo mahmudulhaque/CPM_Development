@@ -445,7 +445,7 @@ void Cpm::enact ()
 		case FLW:
 		{
 			int num_branches = xmlChildElementCount (actelm);
-
+			ev << "CPM::FLW num of branches in the flow " <<num_branches << endl;
 			if (num_branches == 0)
 			{
 				applyC ();
