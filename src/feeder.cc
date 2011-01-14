@@ -57,6 +57,35 @@ void Feeder::fillAutoAttr (xmlNodePtr node, int auto_size, int *auto_vals)
 		fillAutoAttr (child, auto_size, auto_vals);
 }
 
+void  Feeder::fillAutoindex (xmlNodePtr node, int auto_size)
+{
+
+	int old_addr = 0;
+	old_addr = xmlGetIntProp (node, "addr");
+	if ((old_addr!= -1) && index<=auto_size)
+	{
+		if (index == 0)
+		{
+		addr_agent[index]=old_addr;
+		ev<< "Feeder::fillAutoindex addr["<< index <<"] is " << addr_agent[index]<<endl;
+		index++;
+		}
+		else if (index>0 && old_addr!= addr_agent[index-1])
+		{
+			addr_agent[index]=old_addr;
+			ev<< "Feeder::fillAutoindex addr["<< index <<"] is " << addr_agent[index]<<endl;
+			index++;
+
+		}
+	}
+	for (xmlNodePtr child = xmlFirstElementChild(node);
+		child != NULL;
+		child = xmlNextElementSibling(child))
+		fillAutoindex (child, auto_size);
+}
+
+
+
 void Feeder::generateRandomIndex (int size, int *agents)
 {
 	 ev << "Feeder::generateRandomIndex: ";
@@ -177,7 +206,112 @@ xmlDocPtr Feeder::makeCpmDoc (xmlNodePtr node)
 void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 {
 	int autoindex[flow_size+1];
-	ev << "Feeder::runcpm" << endl;
+	int autosize;
+	bool is_first_in_repeat, is_last_in_repeat;
+
+	if (!cmsg)
+	{
+		is_first_in_repeat = true;
+		is_last_in_repeat = (num_repeats <= 0);
+	}
+	else
+	{
+		is_first_in_repeat = (cmsg->getNumRepeats() <= 0);
+		is_last_in_repeat = (cmsg->getNumRepeats() == 1);
+	}
+
+	if (is_first_in_repeat)
+	{
+		generateRandomIndex (flow_size + 1, autoindex);
+
+		autosize = flow_size + 1;
+	}
+	else
+	{
+		autosize = cmsg->getNumSites();
+		for (int i = 0; i < autosize; i++)
+		{
+			autoindex[i] = cmsg->getSites(i);
+			ev << cmsg->getSites(i) << "," ;
+
+		}
+	}
+
+	// loading cmsg from seperate file
+	/*
+	const char *cpm_file_static = getParentModule() -> par("cpm_file_static").stringValue();
+	xmlDocPtr doc_static;
+	doc_static = xmlReadFile (cpm_file_static, NULL, 0);
+	xmlNodePtr child_static = xmlDocGetRootElement(doc_static);
+	xmlDocPtr cpmdoc_static = makeCpmDoc(child_static);
+	xmlChar *cpmxstr1 = xmlDocToXstr (cpmdoc_static);
+	index = 0;
+	fillAutoindex (child_static, autosize);
+
+
+	for(i=0; i<autosize; i++)
+	{
+		ev<<"addr from the array a[" << i << "] " << addr_agent[i] << endl;
+	}
+
+	ev<<"Feeder::runcpm runcpm_template_node is: " << (char *) cpmxstr1 <<endl;
+	*/
+	//*********** need to look at the function that can iterate through the xml tree;
+
+	xmlDocPtr cpmdoc = makeCpmDoc(runcpm_template_node);
+	xmlNodePtr cpmroot = xmlDocGetRootElement (cpmdoc);
+	fillAutoAttr (cpmroot, autosize, autoindex);
+	//*******purpose of "is_first_in_repeat" and "is_last_in_repeat" *****
+	if (is_first_in_repeat && instantiate)
+	{  // last in <c>: first in stack
+		xmlAddChild(xmlElementChildByName (cpmroot, _C),
+					makeAllocNode (autosize, autoindex));
+
+	}
+	if (is_last_in_repeat && instantiate)
+	{  // first in <c>: last in stack (before <none />)
+		xmlAddNextSibling (xmlFirstElementChild (xmlElementChildByName (cpmroot, _C)),
+						  makeAllocNode (autosize, autoindex));
+	}
+
+	CPmessage *runcmsg = new CPmessage (_CPM, CPM);
+	xmlChar *cpmxstr = xmlDocToXstr (cpmdoc);
+	//xmlChar *cpmxstr = xmlDocToXstr (cpmdoc_static);
+	runcmsg->setCpm((char *)cpmxstr);
+	ev<<"Feeder::runcpm " << (char *)cpmxstr << endl;
+	xmlFreeDoc (cpmdoc);
+	xmlFree (cpmxstr);
+	//xmlFree (cpmxstr1);
+	//xmlFreeDoc (doc_static);
+	//xmlFreeDoc (cpmdoc_static);
+	runcmsg->setByteLength (cmsg_byte_length);
+	runcmsg->setNumSites (autosize);
+	for (int i = 0; i < autosize; i++)
+	{
+		runcmsg->setSites(i, autoindex[i]);
+		//runcmsg->setSites(i, addr_agent[i]);
+	}
+
+	if (is_first_in_repeat)
+	{
+		runcmsg->setNumRepeats (num_repeats);
+	}
+	else
+	{
+		if (cmsg->getNumRepeats () < 1000)
+			runcmsg->setNumRepeats (cmsg->getNumRepeats () - 1);
+		else
+			// repeat for ever
+			runcmsg->setNumRepeats (num_repeats);
+	}
+
+	scheduleAt (when, runcmsg);
+}
+
+
+void Feeder::runCpm_static (simtime_t when, CPmessage* cmsg)
+{
+	int autoindex[flow_size+1];
 	int autosize;
 	bool is_first_in_repeat, is_last_in_repeat;
 
@@ -195,23 +329,12 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 	if (is_first_in_repeat)
 	{
 		//generateRandomIndex (flow_size + 1, autoindex);
-		// while agent [0..4] remain in single network and agent[5..10] remain in different network
-		autoindex[0] = 1;
-		autoindex[1] = 2;
-		autoindex[2] = 3;
-		autoindex[3] = 4;
-		autoindex[4] = 5;
-		autoindex[5] = 6;
-		autoindex[6] = 7;
-		autoindex[7] = 8;
-		autoindex[8] = 9;
 
 		autosize = flow_size + 1;
 	}
 	else
 	{
 		autosize = cmsg->getNumSites();
-		ev << "Feeder::runcpm index from runcpm " << endl;
 		for (int i = 0; i < autosize; i++)
 		{
 			autoindex[i] = cmsg->getSites(i);
@@ -220,9 +343,31 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 		}
 	}
 
+	// loading cmsg from seperate file
+
+	const char *cpm_file_static = getParentModule() -> par("cpm_file_static").stringValue();
+	xmlDocPtr doc_static;
+	doc_static = xmlReadFile (cpm_file_static, NULL, 0);
+	xmlNodePtr child_static = xmlDocGetRootElement(doc_static);
+	xmlDocPtr cpmdoc_static = makeCpmDoc(child_static);
+	xmlChar *cpmxstr1 = xmlDocToXstr (cpmdoc_static);
+	index = 0;
+	fillAutoindex (child_static, autosize);
+
+	/*
+	for(i=0; i<autosize; i++)
+	{
+		ev<<"addr from the array a[" << i << "] " << addr_agent[i] << endl;
+	}
+
+	ev<<"Feeder::runcpm runcpm_template_node is: " << (char *) cpmxstr1 <<endl;
+	*/
+	//*********** need to look at the function that can iterate through the xml tree;
+	/*
 	xmlDocPtr cpmdoc = makeCpmDoc(runcpm_template_node);
 	xmlNodePtr cpmroot = xmlDocGetRootElement (cpmdoc);
 	fillAutoAttr (cpmroot, autosize, autoindex);
+	//*******purpose of "is_first_in_repeat" and "is_last_in_repeat" *****
 	if (is_first_in_repeat && instantiate)
 	{  // last in <c>: first in stack
 		xmlAddChild(xmlElementChildByName (cpmroot, _C),
@@ -234,19 +379,23 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 		xmlAddNextSibling (xmlFirstElementChild (xmlElementChildByName (cpmroot, _C)),
 						  makeAllocNode (autosize, autoindex));
 	}
-
+	*/
 	CPmessage *runcmsg = new CPmessage (_CPM, CPM);
-	xmlChar *cpmxstr = xmlDocToXstr (cpmdoc);
+	//xmlChar *cpmxstr = xmlDocToXstr (cpmdoc);
+	xmlChar *cpmxstr = xmlDocToXstr (cpmdoc_static);
 	runcmsg->setCpm((char *)cpmxstr);
-	ev<<"Feeder::" << "Runcpm: " << (char *)cpmxstr << endl;
-	xmlFreeDoc (cpmdoc);
+	ev<<"Feeder::runcpm " << (char *)cpmxstr << endl;
+	//xmlFreeDoc (cpmdoc);
 	xmlFree (cpmxstr);
-
+	xmlFree (cpmxstr1);
+	xmlFreeDoc (doc_static);
+	xmlFreeDoc (cpmdoc_static);
 	runcmsg->setByteLength (cmsg_byte_length);
 	runcmsg->setNumSites (autosize);
 	for (int i = 0; i < autosize; i++)
 	{
-		runcmsg->setSites(i, autoindex[i]);
+		//runcmsg->setSites(i, autoindex[i]);
+		runcmsg->setSites(i, addr_agent[i]);
 	}
 
 	if (is_first_in_repeat)
@@ -273,6 +422,7 @@ void Feeder::initialize ()
 	agent_0 = check_and_cast<Agent *>(getParentModule()->getSubmodule("agent", 0)->getSubmodule("tcpApp",0));
 
 	// CPMnet parameters
+
 	const char *cpm_file = getParentModule() -> par("cpm_file").stringValue();
 	debugging = getParentModule() -> par("debugging");
 	instantiate = getParentModule() -> par("instantiate");
@@ -363,7 +513,13 @@ void Feeder::initialize ()
 			for (int flow_i = 1; flow_i <= (num_servers*mpl)/flow_num_branches; flow_i++)
 			{
 				ev << "Calling runcpm with: "<< flow_i*flow_ia_time/mpl << endl;
-				runCpm (10.5 + flow_i*flow_ia_time/mpl);
+				//runCpm (10.5 + flow_i*flow_ia_time/mpl);
+				string cpm_file_static = getParentModule() -> par("cpm_file_static").str();
+				//string deflt = "default";
+				if (cpm_file_static.compare("default-static.xml")!=0)
+					runCpm_static (10.5 + flow_i*flow_ia_time/mpl);
+				else
+					runCpm(10.5 + flow_i*flow_ia_time/mpl);
 				if (debugging)
 					return; // run only one flow for debugging
 			}
@@ -389,8 +545,12 @@ void Feeder::handleMessage(cMessage *msg)
 	}
 	else
 	{
-		ev<< "Feeder::handle message" <<endl;
-		runCpm (simTime(), cmsg);
+		string cpm_file_static = getParentModule() -> par("cpm_file_static").str();
+		//string deflt = "default";
+		if (cpm_file_static.compare("default-static.xml")!=0)
+			runCpm_static (simTime(), cmsg);
+		else
+			runCpm(simTime(), cmsg);
 		delete msg;
 	}
 }

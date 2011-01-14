@@ -76,6 +76,9 @@ network CPMnet
 		// time for dispatching to engine when centralized with multiple engine,
         volatile double engine_dispatch_time @unit(ms);
         string cpm_file;
+        string cpm_file_static = default("default-static.xml");
+        int num_switches;
+        int num_routers;
         int num_agents;
         int agent_dups; // number of servers = (num_agents-1)*agent_dups
         int mpl; // multi-programming level of agents
@@ -101,75 +104,38 @@ network CPMnet
             parameters:
                 @display("i=block/process,cyan;p=160,20");
         }
-		//sink: Sink {
-		  //  parameters:
-		    //    @display("i=block/process,gold;p=360,80");
-
-
-		//    gates:
-		 //       from_agent[num_agents];
-        //}
-        // sink will also be on top of StandardHost
-        sink: Sinkone {
+		sink: Sinkone {
            @display("i=block/process,cyan;p=450,20");
             //@display("p=539,214");
             gates:
 		        from_agent;
         }
 
-       // agent[num_agents]: Agent {
-         //   parameters:
-           //     @display("i=device/server,blue;p=20,100,ring,200,100");
-
-            //gates:
-              //  to_agent[num_agents];
-               // from_agent[num_agents];
-         //}
-         // working agents on StandardHost 
         agent[num_agents]: StandardAgent;
-        switch1: EtherSwitch {
-            @display("p=75,142");
+        switch[num_switches]: EtherSwitch {
         }
-        router: Router {
-            @display("p=357,70;i=abstract/router");
+        router[num_routers]: Router {
         }
-        switch2: EtherSwitch {
-            @display("p=500,142");
-        }
-        switch3: EtherSwitch {
-            @display("p=357,200");
-        }
+        
     connections allowunconnected:
-
-	    // TODO: more realistic connections than all-connected??
-
-       // for i=0..num_agents-1, for j=0..num_agents-1 {
-         //   agent[i].to_agent[j] --> InterLan --> agent[j].from_agent[i];
-        //}
-
-        //for i=0..num_agents-1, for j=0..num_agents-1 {
-          //  agent[i].to_agent[j] --> InterLan --> agent[j].from_agent[i];
-        //}
-
-     //   for i=0..num_agents-1 {
-           // agent[i].to_sink --> {  delay = 0s; } --> sink.from_agent[i];
-       // }
-
-       // connecting with switch and routers
-
-        for i=0..(num_agents/2-1) {
-            agent[i].ethg++ <--> switch1.ethg++;
+        for i=0..(num_agents%num_switches-1) {
+            agent[i+num_switches*(ceil((num_agents/num_switches))-1)].ethg++ <--> switch[num_switches-1].ethg++; 
         }
-        for i=((num_agents)/2)..num_agents-1 {
-            agent[i].ethg++ <--> switch3.ethg++;
+
+        for i=0..(num_switches-1), for j=0..(ceil((num_agents/num_switches)-1)), if(i*(ceil(num_agents/num_switches)-1)+j+i < (num_agents - num_agents%num_switches)) {
+            agent[i*(ceil(num_agents/num_switches)-1)+j+i].ethg++ <--> switch[i].ethg++;
         }
-        //for i=0..num_agents-1 {
-          //  agent[i].to_sink --> {  delay = 0s; } --> sink.from_agent[i];
-        //}
-        //sink.ethg++ <--> switch2.ethg++;
-        router.ethg++ <--> switch1.ethg++;
-        router.ethg++ <--> switch2.ethg++;
-        router.ethg++ <--> switch3.ethg++;
+        
+        for i=0..(num_routers-2) {
+            router[i].ethg++ <--> router[i+1].ethg++;
+        }
+        for i=0..(num_switches/2-1) {
+        router[0].ethg++ <--> switch[i].ethg++;
+        }
+        
+        for i=num_switches/2..(num_switches-1) {
+        router[4].ethg++ <--> switch[i].ethg++;
+        }
 }
 
 

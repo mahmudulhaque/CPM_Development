@@ -25,6 +25,7 @@ protected:
 
 private:
 	void fillAutoAttr (xmlNodePtr node, int auto_size, int *auto_vals);
+	void fillAutoindex (xmlNodePtr node, int auto_size);
 	void generateRandomIndex (int size, int *agents);
 	bool alreadyGenerated (int agent, int *agents, int sofar);
 	xmlNodePtr makeAllocNode (int autosize, int *autoindex);
@@ -34,9 +35,11 @@ private:
 	// void runRandomCpm ( simtime_t when);
 	// void runRepeatCpm (simtime_t when, CPmessage* cmsg);
 	void runCpm (simtime_t when, CPmessage* cmsg = NULL);
+	void runCpm_static (simtime_t when, CPmessage* cmsg = NULL);
 	bool debugging, instantiate;
+	int addr_agent[20];
 	Agent *agent_0;
-	int num_agents, num_servers, mpl, num_repeats;
+	int num_agents, num_servers, mpl, num_repeats, index;
 	int flow_num_branches, flow_num_steps, flow_size;
 	int64 cmsg_byte_length;
 	simtime_t flow_ia_time;
