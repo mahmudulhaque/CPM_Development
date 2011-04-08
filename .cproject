@@ -365,10 +365,6 @@
 <tool id="cdt.managedbuild.tool.gnu.archiver.base.304225441" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1436051684" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 <option id="gnu.cpp.compiler.option.include.paths.911210608" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out"/>
-<listOptionValue builtIn="false" value="/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/simulations"/>
-<listOptionValue builtIn="false" value="/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/simulations/debug"/>
-<listOptionValue builtIn="false" value="/Users/weihai/Projects/CodingProjects/OMNetProject/cpm/out/gcc-debug"/>
 <listOptionValue builtIn="false" value="/usr/include/libxml2"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.917585178" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>

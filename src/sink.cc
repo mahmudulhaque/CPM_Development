@@ -165,6 +165,7 @@ void Sinkone::handleMessage(cMessage *msg)
 		 //	delete cmsg;
 		//	return;
 		 //}
+
 		sendDirect ( cmsg, feeder );
 	}
 	else

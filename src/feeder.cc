@@ -514,7 +514,7 @@ void Feeder::initialize ()
 			{
 				ev << "Calling runcpm with: "<< flow_i*flow_ia_time/mpl << endl;
 				//runCpm (10.5 + flow_i*flow_ia_time/mpl);
-				string cpm_file_static = getParentModule() -> par("cpm_file_static").str();
+				string cpm_file_static = getParentModule() -> par("cpm_file_static").stdstringValue();
 				//string deflt = "default";
 				if (cpm_file_static.compare("default-static.xml")!=0)
 					runCpm_static (10.5 + flow_i*flow_ia_time/mpl);
@@ -545,8 +545,7 @@ void Feeder::handleMessage(cMessage *msg)
 	}
 	else
 	{
-		string cpm_file_static = getParentModule() -> par("cpm_file_static").str();
-		//string deflt = "default";
+		string cpm_file_static = getParentModule() -> par("cpm_file_static").stdstringValue();
 		if (cpm_file_static.compare("default-static.xml")!=0)
 			runCpm_static (simTime(), cmsg);
 		else

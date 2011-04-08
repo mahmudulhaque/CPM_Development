@@ -80,6 +80,7 @@ public:
 	CPmessageHandler* setSitesVisited (unsigned int k, int sitesVisited_var);
 	CPmessageHandler* insertAgentVisited (int agent_addr);
 	
+
 	bool fromLocal () const;
 	CPmessageHandler* forward (int remote_id);
 	CPmessageHandler* terminate ();

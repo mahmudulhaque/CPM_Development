@@ -56,6 +56,9 @@ class Cpm
 		Cont* c;
 		Cont* bwc;
 		CPmessageHandler *msgh;
+		//actually was private
+		long msgSize ();
+
 	private:
 		long fid;
 		long sid;
@@ -84,7 +87,7 @@ class Cpm
 		bool isEnd () const { return acttype == NON; };
 		
 		CPmessageHandler* refreshMsgH ();
-		long msgSize ();
+
 		void forward (int remote_addr, bool leave_guard = true);
 		unsigned int hash (const xmlChar* xstr);
 		unsigned int poolMatchKey ();
@@ -104,7 +107,7 @@ class Cpm
 		xmlNodePtr makeRollbackFlowBranch ( Cpm *branch_cpm, long jid );
 		xmlNodePtr makeEoi ( long iid );
 		xmlNodePtr makeEif ( long iid );
-		
+
 		void scpNewSite (int newsite);
 		void scpNewScp ( long psid, int psaddr);
 		void scpStop ( long esid, int esaddr, long epsid, int epsaddr );

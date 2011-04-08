@@ -328,7 +328,11 @@ long Cont::msgSizeC ()
 
 long Cont::msgSizeC (xmlNodePtr elm)
 {
+
 	if (elm == NULL) return 0;
+
+	else{
+		ev<<" Cont::MsgSizeC parent node: " << (char *) elm->name <<endl ;
 		
 	if (xmlStrEqual (elm->name, BAD_CAST _INV))
 		return sumChildMsgSizeC (xmlElementChildByName(elm, _INS)) + SVC_MSG_SIZE;
@@ -338,6 +342,7 @@ long Cont::msgSizeC (xmlNodePtr elm)
 	
 	if (xmlStrEqual (elm->name, BAD_CAST _VAR))
 		return xmlGetIntProp (elm, _SIZE);
+	}
 
 	return 0;
 }
@@ -347,7 +352,11 @@ long Cont::sumChildMsgSizeC (xmlNodePtr parent)
 	long sz = 0;
 	for (xmlNodePtr child = xmlFirstElementChild (parent);
 		child != NULL; child=xmlNextElementSibling(child))
+	{
+		ev<<" Cont::sumChildMsgSizeC child node: " << (char *) child->name;
 		sz += msgSizeC (child);	
+	}
+	ev<<"  Cont::sumChildMsgSizeC the size is: " << sz <<endl;
 	return sz;	
 }
 
@@ -358,7 +367,10 @@ long Cont::msgSizeD ()
 
 long Cont::msgSizeD (xmlNodePtr elm)
 {
+	long returnSz = 0;
 	if (elm == NULL) return 0;
+
+
 	
 	// structured activities/constructs
 	if (xmlStrEqual (elm->name, BAD_CAST _C)
@@ -367,16 +379,27 @@ long Cont::msgSizeD (xmlNodePtr elm)
 		|| xmlStrEqual (elm->name, BAD_CAST _ESF)
 		|| xmlStrEqual (elm->name, BAD_CAST _EOI)
 		|| xmlStrEqual (elm->name, BAD_CAST _EIF))
-		return sumChildMsgSizeD (elm) + ACT_MSG_SIZE;
+	{
+		returnSz = sumChildMsgSizeD (elm) + ACT_MSG_SIZE;
+		ev<<" Cont::MsgSizeD parent node: " << (char *) elm->name << "size is" <<returnSz <<endl;
+
+		return returnSz;
+	}
 
 	return ACT_MSG_SIZE;
 }
 
 long Cont::sumChildMsgSizeD (xmlNodePtr parent)
 {
+
 	long sz = 0;
 	for (xmlNodePtr child = xmlFirstElementChild (parent);
 		child != NULL; child=xmlNextElementSibling(child))
-		sz += msgSizeD (child);	
+	{
+		ev<<" Cont::sumChildMsgSizeD child node: " << (char *) child->name<<endl;
+		sz += msgSizeD (child);
+	}
+
+	ev<<" Cont::sumChildMsgSizeD the size is: " << sz <<endl;
 	return sz;	
 }

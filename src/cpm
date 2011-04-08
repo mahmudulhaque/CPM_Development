@@ -1,1 +1,2 @@
-../out/gcc-debug/src/cpm
+#! /bin/sh
+../out/gcc-release/src/CPM_INET -f cpm_batch.ini

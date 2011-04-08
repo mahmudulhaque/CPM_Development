@@ -187,6 +187,8 @@ long Environ::msgSize ()
 long Environ::msgSize (xmlNodePtr elm)
 {
 	if (elm == NULL) return 0;
+	else
+		ev<<" Environ::MsgSize Parent node: " << (char *) elm->name;
 
 	if (xmlStrEqual (elm->name, BAD_CAST _INS)
 		|| xmlStrEqual (elm->name, BAD_CAST _OUTS))
@@ -206,6 +208,10 @@ long Environ::sumChildMsgSize (xmlNodePtr parent)
 	long sz = 0;
 	for (xmlNodePtr child = xmlFirstElementChild (parent);
 		child != NULL; child=xmlNextElementSibling(child))
-		sz += msgSize (child);	
+	{
+		ev<<" Environ::sumChildMsgSize child node: " << (char *) child->name<<endl;
+		sz += msgSize (child);
+	}
+	ev<<"Environ::sumChildMsgSize the size is: " << sz <<endl;
 	return sz;	
 }

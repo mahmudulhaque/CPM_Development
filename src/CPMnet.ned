@@ -17,7 +17,7 @@
 //
 // A sink collects results
 //
-package CPM_INET.src;
+package src;
 
 
 // Agent --
@@ -36,8 +36,8 @@ import ned.DatarateChannel;
 import inet.networklayer.autorouting.FlatNetworkConfigurator;
 import inet.applications.tcpapp.TCPApp;
 import inet.nodes.ethernet.EtherSwitch;
-import CPM_INET.src.Feeder;
-import CPM_INET.src.Sinkone;
+import src.Feeder;
+import src.Sinkone;
 
 channel InterProc extends ned.DatarateChannel
 {
@@ -62,7 +62,7 @@ channel InterLan extends ned.DatarateChannel
         //  delay = normal(5ms, 0.0001);
         delay = 50ms;
         ber = 0;
-        datarate = 10Mbps;
+        datarate = 10000Mbps;
 }
 
 // CPMnet --
@@ -123,18 +123,22 @@ network CPMnet
         }
 
         for i=0..(num_switches-1), for j=0..(ceil((num_agents/num_switches)-1)), if(i*(ceil(num_agents/num_switches)-1)+j+i < (num_agents - num_agents%num_switches)) {
+         // for i=0..(num_switches-1), for j=0..(ceil((num_agents - num_agents%num_switches)/(num_switches-1)-1)), if(i*(ceil(num_agents/num_switches)-1)+j+i < (num_agents - num_agents%num_switches)) {  
             agent[i*(ceil(num_agents/num_switches)-1)+j+i].ethg++ <--> switch[i].ethg++;
         }
         
         for i=0..(num_routers-2) {
-            router[i].ethg++ <--> router[i+1].ethg++;
+             //router[i].ethg++ <--> router[i+1].ethg++;
+             router[i].pppg++ <-->InterLan <--> router[i+1].pppg++;
+            
+            
         }
         for i=0..(num_switches/2-1) {
         router[0].ethg++ <--> switch[i].ethg++;
         }
         
         for i=num_switches/2..(num_switches-1) {
-        router[4].ethg++ <--> switch[i].ethg++;
+        router[num_routers-1].ethg++ <--> switch[i].ethg++;
         }
 }
 

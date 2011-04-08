@@ -47,6 +47,7 @@ class Agent : public cSimpleModule,  public TCPSocket::CallbackInterface
 	long num_interpreted_cmsg, num_processed_cmsg, num_queued_cmsg;
 	long num_queued_smsg, num_processed_smsg;
 	int64 smsg_byte_length;
+	int64 numBytes;
 	bool centralized;
 	cOutVector q_vec;
 	cOutVector cpu_vec;

@@ -501,6 +501,7 @@ void Cpm::enact ()
 				branchcpm.scpNewSite (site->addr());
 
 				xmlChar *cpmxstr = branchcpm.toXstr();
+
 				CPmessageHandler *branchmsgh = msgh->dup()
 									               ->setCpm((char *)cpmxstr)
 									               ->setInterpreted (true);

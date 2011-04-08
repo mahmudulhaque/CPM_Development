@@ -72,58 +72,40 @@ int Agent::sendTo ( int dest, cPacket *msg)
 
 int Agent::sendTo ( int dest, cMessage *msg)
 {
-	/*(if (channels[dest]->isBusy())
-		return sendDelayed (msg,
-				 channels[dest]->getTransmissionFinishTime() - simTime(),
-				 agents[dest]);
-	else
-		return send (msg, agents[dest]);
-		*/
-	// ***for tcp***
 
 	ev << "in the send to function: " << endl;
 	char connectAddress [20];
-	uint32 numBytes;
 	socket.renewSocket();
 	sprintf(connectAddress, "agent[%d]", dest);
 	int connectPort = par("connectPort");
 	socket.setOutputGate(gate("tcpOut"));
 	socket.connect(IPAddressResolver().resolve(connectAddress), connectPort);
-	ev << "Agent:: sending to: " << IPAddressResolver().resolve(connectAddress) << " connecting port: "<< connectPort << "socket status: "<< socket.getState()<< " msg kind: " << msg->getKind() ;
-
-	/*
-	switch (msg->getKind())
-					 	{
-					 		case CPM:
-					 		{
-					 			CPmessage* cmsg = check_and_cast<CPmessage *>(msg);
-					 			//cmsg->setKind(1);
-					 			//ev<< " Original message sending: ";
-					 			numBytes = (uint32)getParentModule()->getParentModule()->par("cmsg_byte_length");
-					 			cmsg->setByteLength(numBytes);
-					 			ev << " Msg kind: from cpm " << cmsg->getKind()  << endl;
-
-					 			socket.send(cmsg);
-					 			break;
-					 		}
-					 		case SCPM:
-					 		{
-					 			SCPmessage* smsg = check_and_cast<SCPmessage *>(msg);
-					 			ev << " Msg kind: from scpm" << msg->getKind()  << endl;
-					 			smsg->setByteLength(smsg_byte_length);
-					 			socket.send(smsg);
-					 			break;
-					 		}
-
-					 	}
-	*/
+	ev << "Agent:: sending to: " << IPAddressResolver().resolve(connectAddress) << " connecting port: "<< connectPort << "socket status: "<< socket.getState()<< " msg kind: " << msg->getKind()<<endl;
 	if (strcmp(msg->getName(), _CPM)==0)
 	{
 		CPmessage* cmsg = check_and_cast<CPmessage *>(msg);
-		numBytes = (uint32)getParentModule()->getParentModule()->par("cmsg_byte_length");
-		cmsg->setByteLength(numBytes);
+		int64 cpmNumBytes = 0;
+		CPmessageHandler *newmsgh = new CPmessageHandler(this, msg);//cmsgh->dup()->set(msg);
+		Cpm *cpmnew;
+		CPMsite *sitecpm = new CPMsite (id, this);
+		cpmnew = new Cpm (sitecpm);
+		cpmnew->set(newmsgh->getCpm());
+		xmlChar *cpmxstr = xmlDocToXstr(cpmnew->doc);
+		ev << "Agent::sendTo cpm message is: " << (char *)cpmxstr << endl;
+		xmlFree (cpmxstr);
+		cpmNumBytes = cpmnew->msgSize();
+		ev << "Agent::sendTo cpm message size is: " << cpmnew->msgSize();
+
+		if(cpmNumBytes != 0)
+			cmsg->setByteLength(cpmNumBytes);
+		else
+			cmsg->setByteLength(numBytes);
 		ev << " Msg kind: from cpm " << cmsg->getKind()  << endl;
+		delete cpmnew;
+		delete sitecpm;
+		delete newmsgh;
 		socket.send(cmsg);
+
 
 	}
 	else if (strcmp(msg->getName(), _SCPM)==0)
@@ -135,8 +117,6 @@ int Agent::sendTo ( int dest, cMessage *msg)
 
 	}
 
-
-	//socket.close();
 	return 1;
 }
 
@@ -198,7 +178,7 @@ void Agent::initialize()
 	fail_detection_time = par("fail_detection_time").doubleValue()/1000;
 	//smsg_byte_length = (long) getParentModule() -> par("smsg_byte_length");
 	smsg_byte_length = (long) getParentModule()->getParentModule() -> par("smsg_byte_length");
-
+	numBytes = (long)getParentModule()->getParentModule()->par("cmsg_byte_length");
 	id = getParentModule()->getIndex();
 	ev << "Agent:: ID is, " << id << endl;
 	//int num_engines = (int) getParentModule() -> par("num_engines");
@@ -254,6 +234,7 @@ void Agent::initialize()
     int receivePort = par("receivePort");
     socketReceive.setOutputGate(gate("tcpOut"));
     socketReceive.bind(address[0] ? IPvXAddress(address) : IPvXAddress(), receivePort);
+    //socket.setCallbackObject(this, NULL);
     socketReceive.setCallbackObject(this, NULL);
     socketReceive.listen();
 }
@@ -331,7 +312,7 @@ void Agent::handleMessage(cMessage *msg)
 
 		if (msg->getKind()==TCP_I_DATA || msg->getKind()==TCP_I_URGENT_DATA)
 			{
-				msg->removeControlInfo();
+				//msg->removeControlInfo();
 
 				if(strcmp(msg->getName(), _CPM)==0)
 					{
@@ -343,6 +324,7 @@ void Agent::handleMessage(cMessage *msg)
 								ev<< cpmsg->getCpm()<< endl;
 								handleCPmessage(cpmsg);
 								ev<< "Agent::successfull in cpm " << endl;
+
 
 							}
 					}
@@ -357,12 +339,30 @@ void Agent::handleMessage(cMessage *msg)
 
 							}
 					}
-
+				int connId = check_and_cast<TCPCommand *>(msg->getControlInfo())->getConnId();
+				msg->removeControlInfo();
+				cMessage *msg = new cMessage("close");
+				msg->setKind(TCP_C_CLOSE);
+				TCPCommand *cmd = new TCPCommand();
+				cmd->setConnId(connId);
+				msg->setControlInfo(cmd);
+				send(msg, "tcpOut");
 
 			}
 
 
 	}
+	//else if(msg->getKind()== TCP_I_CLOSED) {
+		//delete msg;
+		//socket.close();
+
+		//cMessage *msg = new cMessage("CLOSE", TCP_C_CLOSE);
+		//TCPCommand *cmd = new TCPCommand();
+		//int connId = check_and_cast<TCPCommand *>(msg->getControlInfo())->getConnId();
+		//cmd->setConnId(connId);
+		//msg->setControlInfo(cmd);
+		//sendToTCP(msg);
+	//}
 	 else
 	    {
 
