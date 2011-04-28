@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<scope remark="top-level" addr="4">
+			<variables>
+				<variable name="v1"/>
+				<variable name="v2"/>
+				<variable name="v3"/>
+				<variable name="v4"/>
+			</variables>
+			<compensationhandler remark="top-level">
+				<non/>
+			</compensationhandler>
+			<sequence>
+				<invoke op="svcop1" addr="5">
+					<inputVariables>
+						<variable name="v1" size="100"/>
+					</inputVariables>
+					<outputVariables>
+						<variable name="v2" size="200"/>
+					</outputVariables>
+					<compensationhandler>
+						<invoke op="cmpop1" addr="5">
+							<inputVariables>
+								<variable name="v1" size="100"/>
+							</inputVariables>
+							<outputVariables>
+								<variable name="v2" size="200"/>
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<flow>
+					<scope remark="first-half-of-flow">
+						<compensationhandler remark="top-level">
+							<non/>
+						</compensationhandler>
+						<sequence>
+							<invoke op="svcop1" failrate="100" addr="3">
+								<inputVariables>
+									<variable name="v1" size="100"/>
+								</inputVariables>
+								<outputVariables>
+									<variable name="v2" size="200"/>
+								</outputVariables>
+								<compensationhandler>
+									<invoke op="cmpop1" addr="3">
+										<inputVariables>
+											<variable name="v1" size="100"/>
+										</inputVariables>
+										<outputVariables>
+											<variable name="v2" size="200"/>
+										</outputVariables>
+									</invoke>
+								</compensationhandler>
+							</invoke>
+							<invoke op="svcop1" addr="9">
+								<inputVariables>
+									<variable name="v1" size="100"/>
+								</inputVariables>
+								<outputVariables>
+									<variable name="v2" size="200"/>
+								</outputVariables>
+								<compensationhandler>
+									<invoke op="cmpop1" addr="9">
+										<inputVariables>
+											<variable name="v1" size="100"/>
+										</inputVariables>
+										<outputVariables>
+											<variable name="v2" size="200"/>
+										</outputVariables>
+									</invoke>
+								</compensationhandler>
+							</invoke>
+							<invoke op="svcop1" addr="1">
+								<inputVariables>
+									<variable name="v1" size="100"/>
+								</inputVariables>
+								<outputVariables>
+									<variable name="v2" size="200"/>
+								</outputVariables>
+								<compensationhandler>
+									<invoke op="cmpop1" addr="1">
+										<inputVariables>
+											<variable name="v1" size="100"/>
+										</inputVariables>
+										<outputVariables>
+											<variable name="v2" size="200"/>
+										</outputVariables>
+									</invoke>
+								</compensationhandler>
+							</invoke>
+						</sequence>
+					</scope>
+					<scope remark="second-half-of-flow">
+						<sequence>
+							<invoke op="svcop1" addr="10">
+								<inputVariables>
+									<variable name="v3" size="300"/>
+								</inputVariables>
+								<outputVariables>
+									<variable name="v4" size="400"/>
+								</outputVariables>
+								<compensationhandler>
+									<invoke op="cmpop1" addr="10">
+										<inputVariables>
+											<variable name="v3" size="300"/>
+										</inputVariables>
+										<outputVariables>
+											<variable name="v4" size="400"/>
+										</outputVariables>
+									</invoke>
+								</compensationhandler>
+							</invoke>
+							<invoke op="svcop1" addr="8">
+								<inputVariables>
+									<variable name="v3" size="300"/>
+								</inputVariables>
+								<outputVariables>
+									<variable name="v4" size="400"/>
+								</outputVariables>
+								<compensationhandler>
+									<invoke op="cmpop1" addr="8">
+										<inputVariables>
+											<variable name="v3" size="300"/>
+										</inputVariables>
+										<outputVariables>
+											<variable name="v4" size="400"/>
+										</outputVariables>
+									</invoke>
+								</compensationhandler>
+							</invoke>
+						</sequence>
+					</scope>
+				</flow>	
+				<invoke op="svcop1" addr="6">
+					<inputVariables>
+						<variable name="v1" size="100"/>
+					</inputVariables>
+					<outputVariables>
+						<variable name="v3" size="300"/>
+					</outputVariables>
+					<compensationhandler>
+						<invoke op="cmpop1" addr="6">
+							<inputVariables>
+								<variable name="v1" size="100"/>
+							</inputVariables>
+							<outputVariables>
+								<variable name="v3" size="300"/>
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+				<invoke op="svcop1" addr="5">
+					<inputVariables>
+						<variable name="v2" size="200"/>
+					</inputVariables>
+					<outputVariables>
+						<variable name="v4" size="400"/>
+					</outputVariables>
+					<compensationhandler>
+						<invoke op="cmpop1" addr="5">
+							<inputVariables>
+								<variable name="v2" size="200"/>
+							</inputVariables>
+							<outputVariables>
+								<variable name="v4" size="400"/>
+							</outputVariables>
+						</invoke>
+					</compensationhandler>
+				</invoke>
+			</sequence>
+		</scope>

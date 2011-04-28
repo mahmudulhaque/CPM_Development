@@ -62,7 +62,7 @@ channel InterLan extends ned.DatarateChannel
         //  delay = normal(5ms, 0.0001);
         delay = 50ms;
         ber = 0;
-        datarate = 10000Mbps;
+        datarate = 100000Mbps;
 }
 
 // CPMnet --
