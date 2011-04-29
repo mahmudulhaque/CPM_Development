@@ -322,7 +322,7 @@ CPmessageHandler* CPmessageHandler::insertAgentVisited (int agent_addr)
 
 bool CPmessageHandler::fromLocal () const
 {
-	ev << "CPmessageHandler:: src: " << getSrc() << "Agent's id:  " << agent->getParentModule()->getIndex() << endl;
+	//ev << "CPmessageHandler:: src: " << getSrc() << "Agent's id:  " << agent->getParentModule()->getIndex() << endl;
 	//return (getSrc() == agent->Id());
 	return (getSrc()==agent->getParentModule()->getIndex());
 }

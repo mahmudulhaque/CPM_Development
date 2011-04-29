@@ -1,5 +1,5 @@
 #
-# OMNeT++/OMNEST Makefile for CPM_INET
+# OMNeT++/OMNEST Makefile for CPM_DEVELOPMENT
 #
 # This file was generated with the command:
 #  opp_makemake -f --nolink -d src -X. -I/usr/include/libxml2 -KINET_PROJ=../inet
@@ -57,7 +57,7 @@ msgheaders:
 
 clean:
 	-rm -rf $O
-	-rm -f CPM_INET CPM_INET.exe libCPM_INET.so libCPM_INET.a libCPM_INET.dll libCPM_INET.dylib
+	-rm -f CPM_DEVELOPMENT CPM_DEVELOPMENT.exe libCPM_DEVELOPMENT.so libCPM_DEVELOPMENT.a libCPM_DEVELOPMENT.dll libCPM_DEVELOPMENT.dylib
 
 	-cd src && $(MAKE) clean
 

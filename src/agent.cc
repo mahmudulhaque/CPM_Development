@@ -264,11 +264,11 @@ void Agent::handleMessage(cMessage *msg)
 	*/
 
 
-	ev <<"Agent:: Receive socket state: "<< socketReceive.getState() << " testing msg kind: "<< msg->getKind() << "Message name: " << msg->getName()<< " Sender Module:" << getParentModule()->getModuleByRelativePath( msg->getSenderModule()->getFullName())->getFullPath() << " Receiving Module: "<< getParentModule()->getModuleByRelativePath(msg->getArrivalModule()->getFullName())->getFullPath()<<endl;
+	ev <<"Agent::handleMessage Receive socket state: "<< socketReceive.getState() << " testing msg kind: "<< msg->getKind() << "Message name: " << msg->getName()<< " Sender Module:" << getParentModule()->getModuleByRelativePath( msg->getSenderModule()->getFullName())->getFullPath() << " Receiving Module: "<< getParentModule()->getModuleByRelativePath(msg->getArrivalModule()->getFullName())->getFullPath()<<endl;
 	//for tcp connections
 	if (msg->isSelfMessage())
 	{
-		ev << "Agent::in handle message" << endl;
+		ev << "Agent::handleMessage in Agent[" <<  getParentModule()->getIndex() <<  "]handle message" << endl;
 		/*switch (msg->getKind())
 				 	{
 				 		case CPM:
@@ -293,13 +293,13 @@ void Agent::handleMessage(cMessage *msg)
 				 	*/
 		if (strcmp(msg->getName(), _CPM)==0)
 			{
-				ev <<"Agent::cpm is called from handle"<<endl;
+				ev <<"Agent::handleMessage cpm is called from Agent[" << getParentModule()->getIndex() << "]handle"<<endl;
 				ev << ((CPmessage *)msg)->getCpm()<< endl;
 				handleCPmessage (msg);
 			}
 		else if (strcmp(msg->getName(), _SCPM)==0)
 				{
-					ev <<"Agent::scpm is called from handle"<<endl;
+					ev <<"Agent::handleMessage scpm is called from Agent[" << getParentModule()->getIndex()<<"]handle"<<endl;
 					handleSCPmessage (msg);
 				}
 
@@ -308,7 +308,7 @@ void Agent::handleMessage(cMessage *msg)
 
 	else if (strcmp(msg->getName(), _CPM)==0||strcmp(msg->getName(), _SCPM)==0)
 	{
-		ev << "Agent::Message name in else if: " << msg->getName() <<endl;
+		ev << "Agent::handleMessage Message name(TCP) in Agent[" << getParentModule()->getIndex()<<"]is: " << msg->getName() <<endl;
 
 		if (msg->getKind()==TCP_I_DATA || msg->getKind()==TCP_I_URGENT_DATA)
 			{
@@ -319,11 +319,11 @@ void Agent::handleMessage(cMessage *msg)
 						CPmessage *cpmsg = check_and_cast<CPmessage *>(msg);
 						if (cpmsg)
 							{
-								ev<< "Agent::CPM Message with tcp Connection" << endl;
+								ev<< "Agent::handleMessage CPM Message with tcp Connection" << endl;
 								//ev << ((CPmessage *)msg)->getCpm()<< endl;
 								ev<< cpmsg->getCpm()<< endl;
 								handleCPmessage(cpmsg);
-								ev<< "Agent::successfull in cpm " << endl;
+								ev<< "Agent::handleMessage successfull in cpm " << endl;
 
 
 							}
@@ -335,7 +335,7 @@ void Agent::handleMessage(cMessage *msg)
 						if (scpmsg)
 							{
 	        	        	handleSCPmessage(scpmsg);
-	        	        	ev<< "Agent::successfull in scpm " << endl;
+	        	        	ev<< "Agent::handleMessage successfull in scpm " << endl;
 
 							}
 					}
@@ -385,12 +385,12 @@ void Agent::handleCPmessage(cMessage *msg)
 		if ((!cmsgh->getRollingback()) && cmsgh->getFailed()
 			&& centralized && id != 0)
 		{
-			ev << "Processing failed, forwarding to engine.\n";
+			ev << "Agent::handleCPmessage: Processing failed, forwarding to engine.\n";
 			cmsgh->forward(0);
 		}
 		else
 		{
-			ev << "\n::calling from Get_Processed::" << endl;
+			ev << "Agent::handleCPmessage:\n::calling from Get_Processed::" << endl;
 			cpm->set (cmsgh->getCpm())->dispatch(cmsgh);
 		}
 		num_cpus_busy--;
@@ -402,18 +402,16 @@ void Agent::handleCPmessage(cMessage *msg)
 	if (cmsgh->getInterpreted())
 	{
 		cmsgh->increaseInterpretTime ()->setInterpreted(false);
-		ev << "Agent::handleCPmessage:queue before dispatch:\n";
+		ev << "Agent::handleCPmessage queue before dispatch:\n";
 		//ev << site->queue->dump();
 		ev << "Agent::handleCPmessage:\n" << cmsgh->getCpm() << endl;
-		ev << "\n::calling from Get_Interpreted::" << endl;
 		cpm->set (cmsgh->getCpm())->dispatch(cmsgh);
 	
-		ev << "Agent::handleCPmessage:queue after dispatch:\n";
 		//ev << site->queue->dump();
 		//ev << "Agent::Msg pool after installation: " << site->pool->dump() << endl;
 		num_cpus_busy--;
 		cpu_vec.record(num_cpus_busy);
-		ev << "Agent[" << getParentModule()->getIndex() << "]: release a CPU. Now "
+		ev << "Agent::handleCPmessage: Agent[" << getParentModule()->getIndex() << "]: release a CPU. Now "
 			<< num_cpus_busy << " busy\n";
 	}
 	else
@@ -424,12 +422,11 @@ void Agent::handleCPmessage(cMessage *msg)
 			cmsgh->insertAgentVisited(getParentModule()->getIndex());
 
 			cmsgh->increaseCommTime ();
-			//ev << "First time not calling from Agent: " << getIndex() << endl;
-			ev << "Agent::First time not calling from Agent: " << getParentModule()->getFullName() << endl;
+			//ev << "Agent::handleCPmessage First time not calling from Agent: " << getParentModule()->getFullName() << endl;
 		}
 		// setTimestamp before enqueuing such that queuing time
 		// is correctly calculated
-		ev << "Agent::handlecp_message calling from Agent: " << getParentModule()->getFullName() <<endl;
+		ev << "Agent::handleCPmessage calling from Agent: " << getParentModule()->getFullName() <<endl;
 		cmsgh->Msg()->setTimestamp();
 		site->queue->enqueue(cmsgh->Msg());
 	}
@@ -464,7 +461,7 @@ void Agent::handleSCPmessage(cMessage *msg)
 
 void Agent::scheduleCPU ()
 {
-	ev << "Agent::scheduleCPU - num_cpus_busy=" << num_cpus_busy <<endl;
+	ev << "Agent::scheduleCPU  num_cpus_busy=" << num_cpus_busy <<endl;
 	while (num_cpus_busy < num_cpus)
 	{
 		// the scp_queue has higher priority, such that rollback etc
@@ -477,13 +474,13 @@ void Agent::scheduleCPU ()
 	
 		num_cpus_busy++; // use a cpu
 		cpu_vec.record(num_cpus_busy);
-		ev << "Agent[" << getParentModule()->getIndex() << "]: use a CPU. Now ";
+		ev << "Agent::scheduleCPU Agent[" << getParentModule()->getIndex() << "]: use a CPU. Now ";
 		ev << num_cpus_busy << " busy" << endl;
 		if (strcmp(msg->getName(), _CPM)==0)
 			{
 				cmsgh->set (msg);
-				ev << "Agent[" << getParentModule()->getIndex() << "]: dequeued\n" ;
-				ev<<"schedule cpu:\n"<< cmsgh->getCpm() << endl;
+				ev << "Agent::scheduleCPU From Agent[" << getParentModule()->getIndex() << "]: dequeued\n" ;
+				ev<<"Agent::scheduleCPU\n"<< cmsgh->getCpm() << endl;
 	
 				cmsgh->increaseQueueTime()->setInterpreted (true);
 				scheduleAt (simTime() + interpret_time*normal(1, 0.1),cmsgh->Msg());

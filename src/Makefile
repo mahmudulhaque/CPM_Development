@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for CPM_INET
+# OMNeT++/OMNEST Makefile for CPM_DEVELOPMENT
 #
 # This file was generated with the command:
 #  opp_makemake -f --deep -I/usr/include/libxml2 -I../../inet/src/networklayer/ipv4 -I../../inet/src/networklayer/common -I../../inet/src/networklayer/rsvp_te -I../../inet/src/networklayer/icmpv6 -I../../inet/src/transport/tcp -I../../inet/src/networklayer/mpls -I../../inet/src/base -I../../inet/src/networklayer/ted -I../../inet/src/util/headerserializers -I../../inet/src/networklayer/contract -I../../inet/src/util -I../../inet/src/transport/contract -I../../inet/src/linklayer/mfcore -I../../inet/src/transport/sctp -I../../inet/src/networklayer/ipv6 -I../../inet/src/applications/tcpapp -I../../inet/src/world -I../../inet/src/applications/pingapp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -I../../inet/src/networklayer/ldp -I../../inet/src/transport/udp -L../../inet/out/$(CONFIGNAME)/src -lxml2 -linet -KINET_PROJ=../../inet
 #
 
 # Name of target to be created (-o option)
-TARGET = CPM_INET$(EXE_SUFFIX)
+TARGET = CPM_DEVELOPMENT$(EXE_SUFFIX)
 
 # User interface (uncomment one) (-u option)
 USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
@@ -134,7 +134,7 @@ msgheaders: $(MSGFILES:.msg=_m.h)
 
 clean:
 	-rm -rf $O
-	-rm -f CPM_INET CPM_INET.exe libCPM_INET.so libCPM_INET.a libCPM_INET.dll libCPM_INET.dylib
+	-rm -f CPM_DEVELOPMENT CPM_DEVELOPMENT.exe libCPM_DEVELOPMENT.so libCPM_DEVELOPMENT.a libCPM_DEVELOPMENT.dll libCPM_DEVELOPMENT.dylib
 	-rm -f ./*_m.cc ./*_m.h
 
 cleanall: clean
@@ -144,266 +144,266 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/cpmcommon.o: cpmcommon.cc \
+$O/agent.o: agent.cc \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
+	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	SCPmessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	CPmessageHandler.h \
+	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	environ.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
 	CPmessage_m.h \
+	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
+	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
+	$(INET_PROJ)/src/base/NotifierConsts.h \
+	cont.h \
+	cpmsite.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	cpm.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
 	cpmcommon.h \
-	SCPmessage_m.h
+	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
+	agent.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
 $O/scpact.o: scpact.cc \
 	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
-	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
 	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
-	cpmsite.h \
-	agent.h \
-	environ.h \
+	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	SCPmessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
 	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	cont.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	SCPmessage_m.h \
-	cpmcommon.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	environ.h \
 	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
 	$(INET_PROJ)/src/base/ModuleAccess.h \
-	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	CPmessage_m.h \
 	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
 	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
 	$(INET_PROJ)/src/base/NotifierConsts.h \
+	cont.h \
+	cpmsite.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	cpm.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
 	scpact.h \
-	CPmessage_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	cpm.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
-$O/CPmessageHandler.o: CPmessageHandler.cc \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
-	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
-	cpmsite.h \
+	cpmcommon.h \
 	agent.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
-	environ.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	cont.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	SCPmessage_m.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	cpmcommon.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
-	$(INET_PROJ)/src/base/ModuleAccess.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	CPmessageHandler.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
-	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
-	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
-	$(INET_PROJ)/src/base/NotifierConsts.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	CPmessage_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	cpm.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
-$O/feeder.o: feeder.cc \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
-	cpmsite.h \
-	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
-	agent.h \
-	environ.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	cont.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	SCPmessage_m.h \
-	cpmcommon.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	$(INET_PROJ)/src/base/ModuleAccess.h \
-	CPmessageHandler.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
-	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
-	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
-	$(INET_PROJ)/src/base/NotifierConsts.h \
-	CPmessage_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	feeder.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	cpm.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
-$O/SCPmessageHandler.o: SCPmessageHandler.cc \
-	SCPmessageHandler.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
-	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
-	cpmsite.h \
-	agent.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
-	environ.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
-	cont.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	SCPmessage_m.h \
-	cpmcommon.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
-	$(INET_PROJ)/src/base/ModuleAccess.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	CPmessageHandler.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
-	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
-	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
-	$(INET_PROJ)/src/base/NotifierConsts.h \
-	CPmessage_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	cpm.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
-$O/cpmsite.o: cpmsite.cc \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
-	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
-	agent.h \
-	cpmsite.h \
-	environ.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
-	cont.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	SCPmessage_m.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	cpmcommon.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	$(INET_PROJ)/src/base/ModuleAccess.h \
-	CPmessageHandler.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
-	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
-	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
-	$(INET_PROJ)/src/base/NotifierConsts.h \
-	scpact.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	CPmessage_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	cpm.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
-$O/environ.o: environ.cc \
-	cpmsite.h \
-	CPmessage_m.h \
-	cpmcommon.h \
-	environ.h \
-	cont.h \
-	cpm.h \
-	SCPmessage_m.h
-$O/CPmessage_m.o: CPmessage_m.cc \
-	CPmessage_m.h
 $O/cpm.o: cpm.cc \
 	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
 	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
 	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
-	cpmsite.h \
-	agent.h \
-	environ.h \
+	SCPmessage_m.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
 	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
-	cont.h \
 	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	SCPmessage_m.h \
-	cpmcommon.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
 	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
-	$(INET_PROJ)/src/base/ModuleAccess.h \
+	environ.h \
 	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	CPmessageHandler.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	CPmessage_m.h \
 	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
 	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
 	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
 	$(INET_PROJ)/src/base/NotifierConsts.h \
+	cont.h \
+	cpmsite.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	cpm.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
 	scpact.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	CPmessage_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	cpmcommon.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	cpm.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
-$O/agent.o: agent.cc \
-	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
-	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
-	cpmsite.h \
 	agent.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
-	environ.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
-	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
-	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
-	cont.h \
-	SCPmessage_m.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	cpmcommon.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
-	$(INET_PROJ)/src/base/ModuleAccess.h \
-	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	CPmessageHandler.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
-	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
-	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
-	$(INET_PROJ)/src/base/NotifierConsts.h \
-	CPmessage_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	cpm.h \
 	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
-$O/sink.o: sink.cc \
-	CPmessage_m.h \
-	cpmcommon.h \
-	sink.h \
-	SCPmessage_m.h
 $O/cont.o: cont.cc \
 	CPmessage_m.h \
+	SCPmessage_m.h \
 	cpmcommon.h \
+	cont.h
+$O/cpmcommon.o: cpmcommon.cc \
+	CPmessage_m.h \
+	SCPmessage_m.h \
+	cpmcommon.h
+$O/SCPmessageHandler.o: SCPmessageHandler.cc \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
+	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	SCPmessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	CPmessageHandler.h \
+	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	environ.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	CPmessage_m.h \
+	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
+	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
+	$(INET_PROJ)/src/base/NotifierConsts.h \
 	cont.h \
-	SCPmessage_m.h
+	SCPmessageHandler.h \
+	cpmsite.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	cpm.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	cpmcommon.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
+	agent.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
+$O/feeder.o: feeder.cc \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
+	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
+	SCPmessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	CPmessageHandler.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	environ.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	CPmessage_m.h \
+	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
+	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
+	$(INET_PROJ)/src/base/NotifierConsts.h \
+	cont.h \
+	cpmsite.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	cpm.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
+	cpmcommon.h \
+	feeder.h \
+	agent.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
 $O/SCPmessage_m.o: SCPmessage_m.cc \
 	SCPmessage_m.h
+$O/sink.o: sink.cc \
+	CPmessage_m.h \
+	SCPmessage_m.h \
+	cpmcommon.h \
+	sink.h
+$O/cpmsite.o: cpmsite.cc \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
+	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	SCPmessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	CPmessageHandler.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	environ.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	CPmessage_m.h \
+	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
+	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
+	$(INET_PROJ)/src/base/NotifierConsts.h \
+	cont.h \
+	cpmsite.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	cpm.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	scpact.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
+	cpmcommon.h \
+	agent.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
+$O/CPmessageHandler.o: CPmessageHandler.cc \
+	$(INET_PROJ)/src/networklayer/ipv4/IPv4InterfaceData.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ.h \
+	$(INET_PROJ)/src/applications/tcpapp/TCPGenericCliAppBase.h \
+	SCPmessage_m.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IPRoute.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/Utils.h \
+	$(INET_PROJ)/src/linklayer/contract/MACAddress.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceToken.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	CPmessageHandler.h \
+	$(INET_PROJ)/src/networklayer/common/IInterfaceTable.h \
+	environ.h \
+	$(INET_PROJ)/src/networklayer/rsvp_te/IntServ_m.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	$(INET_PROJ)/src/base/ModuleAccess.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceEntry.h \
+	CPmessage_m.h \
+	$(INET_PROJ)/src/networklayer/ipv4/RoutingTableAccess.h \
+	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
+	$(INET_PROJ)/src/networklayer/common/InterfaceTableAccess.h \
+	$(INET_PROJ)/src/base/NotifierConsts.h \
+	cont.h \
+	cpmsite.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	cpm.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	cpmcommon.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
+	agent.h \
+	$(INET_PROJ)/src/networklayer/ipv4/IRoutingTable.h
+$O/environ.o: environ.cc \
+	CPmessage_m.h \
+	cpmsite.h \
+	SCPmessage_m.h \
+	cpm.h \
+	environ.h \
+	cpmcommon.h \
+	cont.h
+$O/CPmessage_m.o: CPmessage_m.cc \
+	CPmessage_m.h
 

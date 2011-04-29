@@ -278,7 +278,7 @@ void Feeder::runCpm (simtime_t when, CPmessage* cmsg)
 	xmlChar *cpmxstr = xmlDocToXstr (cpmdoc);
 	//xmlChar *cpmxstr = xmlDocToXstr (cpmdoc_static);
 	runcmsg->setCpm((char *)cpmxstr);
-	ev<<"Feeder::runcpm " << (char *)cpmxstr << endl;
+	//ev<<"Feeder::runcpm " << (char *)cpmxstr << endl;
 	xmlFreeDoc (cpmdoc);
 	xmlFree (cpmxstr);
 	//xmlFree (cpmxstr1);
@@ -483,8 +483,6 @@ void Feeder::initialize ()
 					xmlDocPtr cpmdoc = makeCpmDoc (this_child);
 					xmlChar *cpmxstr = xmlDocToXstr (cpmdoc);
 					cmsg->setCpm((char *)cpmxstr);
-					ev << "CPM message installed in agent: "<<agent_i << endl;
-					ev << (char *)cpmxstr << endl;
 					xmlFree (cpmxstr);
 					xmlFreeNode (this_child);
 					xmlFreeDoc (cpmdoc);
@@ -498,13 +496,9 @@ void Feeder::initialize ()
 
 		if (xmlStrEqual(child->name, BAD_CAST _CPMRUN))
 		{
-			ev << "Feeder::initialize: cpmrun ";
-			ev << (num_servers*mpl)/flow_num_branches <<" flows\n";
 			runcpm_template_node = xmlFirstElementChild (child);
 			xmlDocPtr cpmdoc_run = makeCpmDoc (runcpm_template_node);
 			xmlChar *cpmxstr_run = xmlDocToXstr (cpmdoc_run);
-			ev << "nodes form cpm_run: " << endl;
-			ev << (char *) cpmxstr_run << endl;
 			if (!runcpm_template_node)
 			{
 				ev << "Feeder: nothing to run!\n";
@@ -512,7 +506,6 @@ void Feeder::initialize ()
 			}
 			for (int flow_i = 1; flow_i <= (num_servers*mpl)/flow_num_branches; flow_i++)
 			{
-				ev << "Calling runcpm with: "<< flow_i*flow_ia_time/mpl << endl;
 				//runCpm (10.5 + flow_i*flow_ia_time/mpl);
 				string cpm_file_static = getParentModule() -> par("cpm_file_static").stdstringValue();
 				//string deflt = "default";
